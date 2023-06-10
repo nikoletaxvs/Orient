@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model Orient.Models.checkBox
+<form asp-controller="home" asp-action="Submit">
+    <ol type="1">
+        @foreach(var q in ViewBag.Questions)
+        {
+            <li>
+                @q.description
+
+                <input type="hidden" name="ans" value="@q.correctAnswear"/>
+                <ol type="a">
+
+                    <li><input type="radio" name="question_ans" value="@q.answear1" /> @q.answear1</li>
+                    <li><input type="radio" name="question_ans" value="@q.answear2" /> @q.answear2</li>
+                    <li><input type="radio" name="question_ans" value="@q.answear3" /> @q.answear3</li>
+                    <li><input type="radio" name="question_ans" value="@q.answear4"/> @q.answear4</li>
+            
+                </ol>
+            </li>
+        }
+    </ol>
+    <input type="submit" value="Submit" />
+</form> 
+<form asp-controller="Home" asp-action="Index" method="post">
+    @foreach(var checkBox in Model.checkBoxes)
+    {
+        <div class="form-check">
+         <input 
+                class="form-check-input"
+                type="checkbox"
+                value="@checkBox.Value"
+                name="CheckBoxesList"
+                id="checkbox_@checkBox.Value"
+                checked="@checkBox.IsChecked">
+             <label  class="form-check-label" for="checkbox_@checkBox.Value">
+           @checkBox.Description
+          </label>
+        </div>
+    }
+    <div class="mb-3">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</form>
