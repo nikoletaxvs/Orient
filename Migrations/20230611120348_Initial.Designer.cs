@@ -11,8 +11,8 @@ using Orient.Data;
 namespace Orient.Migrations
 {
     [DbContext(typeof(ApplicationDbContect))]
-    [Migration("20230609165356_field_added")]
-    partial class field_added
+    [Migration("20230611120348_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,6 +22,31 @@ namespace Orient.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Orient.Models.Answer", b =>
+                {
+                    b.Property<int>("AnswerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AnswerId"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Correct")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AnswerId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Answer");
+                });
 
             modelBuilder.Entity("Orient.Models.checkBoxOption", b =>
                 {
@@ -45,6 +70,23 @@ namespace Orient.Migrations
                     b.HasKey("id");
 
                     b.ToTable("checkbox_answears");
+                });
+
+            modelBuilder.Entity("Orient.Models.Question", b =>
+                {
+                    b.Property<int>("QuestionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuestionId"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("QuestionId");
+
+                    b.ToTable("Question");
                 });
 
             modelBuilder.Entity("Orient.Models.unit1_question", b =>
@@ -86,6 +128,22 @@ namespace Orient.Migrations
                     b.HasKey("id");
 
                     b.ToTable("unit1_Questions");
+                });
+
+            modelBuilder.Entity("Orient.Models.Answer", b =>
+                {
+                    b.HasOne("Orient.Models.Question", "Questions")
+                        .WithMany("Answers")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("Orient.Models.Question", b =>
+                {
+                    b.Navigation("Answers");
                 });
 #pragma warning restore 612, 618
         }

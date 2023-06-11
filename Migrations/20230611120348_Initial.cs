@@ -24,6 +24,19 @@ namespace Orient.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Question",
+                columns: table => new
+                {
+                    QuestionId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Question", x => x.QuestionId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "unit1_Questions",
                 columns: table => new
                 {
@@ -34,21 +47,54 @@ namespace Orient.Migrations
                     correctAnswear = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     answear1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     answear2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    answear3 = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    answear3 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    answear4 = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_unit1_Questions", x => x.id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Answer",
+                columns: table => new
+                {
+                    AnswerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Correct = table.Column<bool>(type: "bit", nullable: false),
+                    QuestionId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Answer", x => x.AnswerId);
+                    table.ForeignKey(
+                        name: "FK_Answer_Question_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Question",
+                        principalColumn: "QuestionId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Answer_QuestionId",
+                table: "Answer",
+                column: "QuestionId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Answer");
+
+            migrationBuilder.DropTable(
                 name: "checkbox_answears");
 
             migrationBuilder.DropTable(
                 name: "unit1_Questions");
+
+            migrationBuilder.DropTable(
+                name: "Question");
         }
     }
 }

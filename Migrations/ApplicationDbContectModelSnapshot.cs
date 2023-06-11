@@ -21,6 +21,31 @@ namespace Orient.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Orient.Models.Answer", b =>
+                {
+                    b.Property<int>("AnswerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AnswerId"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Correct")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AnswerId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Answer");
+                });
+
             modelBuilder.Entity("Orient.Models.checkBoxOption", b =>
                 {
                     b.Property<int>("id")
@@ -43,6 +68,23 @@ namespace Orient.Migrations
                     b.HasKey("id");
 
                     b.ToTable("checkbox_answears");
+                });
+
+            modelBuilder.Entity("Orient.Models.Question", b =>
+                {
+                    b.Property<int>("QuestionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuestionId"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("QuestionId");
+
+                    b.ToTable("Question");
                 });
 
             modelBuilder.Entity("Orient.Models.unit1_question", b =>
@@ -84,6 +126,22 @@ namespace Orient.Migrations
                     b.HasKey("id");
 
                     b.ToTable("unit1_Questions");
+                });
+
+            modelBuilder.Entity("Orient.Models.Answer", b =>
+                {
+                    b.HasOne("Orient.Models.Question", "Questions")
+                        .WithMany("Answers")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("Orient.Models.Question", b =>
+                {
+                    b.Navigation("Answers");
                 });
 #pragma warning restore 612, 618
         }

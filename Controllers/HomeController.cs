@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Orient.Data;
 using Orient.Models;
 using System.Diagnostics;
@@ -21,31 +22,8 @@ namespace Orient.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Questions = _db.unit1_Questions.ToList();
-           var model = new checkBox() 
-           {
-               checkBoxes = new List<checkBoxOption>
-                {
-                   new checkBoxOption()
-                   {
-                       IsChecked = true,
-                       Description ="Option 1",
-                       Value="OPTION 1"
-                   },
-                   new checkBoxOption()
-                   {
-                       IsChecked = true,
-                       Description ="Option 2",
-                       Value="OPTION 2"
-                   },
-                   new checkBoxOption()
-                   {
-                       IsChecked = true,
-                       Description ="Option 3",
-                       Value="OPTION 3"
-                   }
-                }
-            };
+            ViewBag.Questions = _db.Questions.ToList();
+            IEnumerable<Question> model = _db.Questions.Include(n => n.Answers).ToList();
             return View(model);
         }
         [HttpPost]
@@ -65,14 +43,27 @@ namespace Orient.Controllers
         [Route("submit")] 
         public IActionResult Submit(IFormCollection iformCollection)
         {
-            var questionAnswers = iformCollection["ans"];
-            string a = "Nothing";
+            List<bool> replies = new List<bool>();
+            string[] questionAnswers = iformCollection["questionId"];
+            
             foreach(var q in questionAnswers)
             {
                
+                Answer answerIdCorrect = _db.Answers
+                    .Where(r => r.QuestionId == int.Parse(q))
+                    .Where(a => a.Correct == true)
+                    .FirstOrDefault();
+                if (answerIdCorrect.AnswerId == int.Parse(iformCollection["question_" + q]))
+                {
+                    replies.Add(true);
+                }
+                else
+                {
+                    replies.Add(false);
+                }
                 
             }
-            ViewBag.A = a;
+            ViewBag.A = replies;
             return View("Report");
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
