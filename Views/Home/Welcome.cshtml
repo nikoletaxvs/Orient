@@ -1,2 +1,206 @@
-﻿<h3>Welcome @ViewBag.username</h3>
-<a asp-controller="home" asp-action="logout">Logout</a>
+﻿<section name="hero">
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+  </div>
+  <div class="carousel-inner">
+      <div class="carousel-item active">
+         <img style="height:100vh;width:100vw;object-fit:cover;filter:brightness(0.3);" src="~/lib/icons/datas.jpg" />
+         <div class="carousel-caption d-none d-md-block">
+             <h5> Welcome <span>@ViewBag.fullname</span>.</h5>
+             <p>Orient is your comprehensive career orientation software, designed <br />specifically for computer science students.</p>
+             <p><a class="btn btn-warning mt-3">Discover Our Courses</a></p>
+         </div>
+    </div>
+    <div class="carousel-item ">
+    <img style="height:100vh;width:100vw;object-fit:cover;filter:brightness(0.4);" src="~/lib/icons/soft.jpg" />
+     <div class="carousel-caption d-none d-md-block">
+             <h5>Discover opportunities.</h5>
+             <p>Orient is your comprehensive career orientation software, designed <br />specifically for computer science students.</p>
+                    <p><a class="btn btn-warning mt-3">Discover Our Courses</a></p>
+         </div>
+    </div>
+    <div class="carousel-item">
+    <img style="height:100vh;width:100vw;object-fit:cover;filter:brightness(0.4);" src="~/lib/icons/ux.jpg" />
+     <div class="carousel-caption d-none d-md-block">
+             <h5>Test your skills.</h5>
+             <p>Orient is your comprehensive career orientation software, designed <br />specifically for computer science students.</p>
+                    <p><a class="btn btn-warning mt-3">Discover Our Courses</a></p>
+         </div>
+    </div>
+            <div class="carousel-item">
+                <img style="height:100vh;width:100vw;object-fit:cover;filter:brightness(0.4);" src="~/lib/icons/game.jpg" />
+                <div class="carousel-caption d-none d-md-block">
+                    <h5> Achieve your dreams.</h5>
+                    <p>Orient is your comprehensive career orientation software, designed <br />specifically for computer science students.</p>
+                    <p><a class="btn btn-warning mt-3">Discover Our Courses</a></p>
+                </div>
+            </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+</section>
+<section name="achievements">
+<div class="py-4">
+    <div class="container py-3">
+        <h1 class="p-4 text-center fw-bold" style="color:#3A3B3C">Achievements</h1>
+    </div>
+
+    <div class="container mt-4 mb-2">
+        <div class="row px-4 mb-3">
+            <div class="col-xl-3 col-sm-6 col-12"> 
+                <div class="card card-a p-2 ">
+                  <div class="card-content">
+                    <div class="card-body">
+                      <div class="media d-flex row">
+                        <div class="align-self-center col">
+                           <img height="40" src="~/lib/icons/test.png" />
+                        </div>
+                        <div class="media-body col text-end">
+                          <h3 >278</h3>
+                             <span style="color:#3A3B3C">Tests Completed</span>
+                        </div>
+                      </div>
+                            
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card card-a p-2">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="media d-flex row">
+                                <div class="align-self-center col">
+                                    <img height="40" src="~/lib/icons/rating.png" />
+                                </div>
+                                <div class="media-body col text-end">
+                                        <h3>@ViewBag.totalPoints</h3>
+                                    <span style="color:#3A3B3C">Points Earned</span>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card card-a p-2">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="media d-flex row">
+                                <div class="align-self-center col">
+                                    <img height="40" src="~/lib/icons/contacts.png" />
+                                </div>
+                                <div class="media-body col text-end">
+                                    <h3>278</h3>
+                                    <span style="color:#3A3B3C">Participated In Program</span>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12"> 
+                <div class="card p-2">
+                  <div class="card-content">
+                    <div class="card-body">
+                      <div class="media d-flex row">
+                        <div class="align-self-center col">
+                           <img height="40" src="~/lib/icons/grade.png" />
+                        </div>
+                        <div class="media-body col text-end">
+                          <h3 >278</h3>
+                             <span style="color:#3A3B3C">Average Points</span>
+                        </div>
+                      </div>
+                           
+                    </div>
+                  </div>
+                </div>
+            </div>
+           
+        </div>
+        
+    </div>
+
+    
+</div>
+</section>
+<div class="container py-3">
+    <h1 class="p-4 text-center fw-bold" style="color:#3A3B3C">Career Courses</h1>
+</div>
+
+<div class="container">
+    <div class="card-group p-1">
+        <div class="card mx-3">
+            <img src="/lib/icons/ai.jpg" class="card-img-top" alt="ai" style="filter:brightness(0.5);">
+            <div class="card-body">
+                <h5 class="card-title">Machine Learning</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-body-secondary">Last updated 3 mins ago</small>
+            </div>
+        </div>
+        <div class="card mx-3">
+            <img src="/lib/icons/soft.jpg" class="card-img-top" alt="..." style="filter:brightness(0.5);">
+            <div class="card-body">
+                <h5 class="card-title">Software Engineering</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-body-secondary">Last updated 3 mins ago</small>
+            </div>
+        </div>
+        <div class="card mx-3">
+            <img src="lib/icons/datas.jpg" class="card-img-top" alt="..." style="filter:brightness(0.5);">
+            <div class="card-body">
+                <h5 class="card-title">Data Science</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-body-secondary">Last updated 3 mins ago</small>
+            </div>
+        </div>
+         <div class="card mx-3">
+            <img src="lib/icons/ux.jpg" class="card-img-top" alt="..." style="filter:brightness(0.5);">
+            <div class="card-body">
+                <h5 class="card-title">UX Design</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-body-secondary">Last updated 3 mins ago</small>
+            </div>
+        </div>
+        <div class="card mx-3">
+            <img src="lib/icons/game.jpg" class="card-img-top" alt="..." style="filter:brightness(0.5);">
+            <div class="card-body">
+                <h5 class="card-title">Game Developer</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-body-secondary">Last updated 3 mins ago</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-3">
+    <h1 class="p-4 text-center fw-bold" style="color:#3A3B3C">Career Advisor</h1>
+</div>

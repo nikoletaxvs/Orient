@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\css\\superhero.css",
+      "PackagePath": "staticwebassets\\css\\superhero.css"
+    },
+    {
       "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
@@ -195,6 +199,54 @@
     {
       "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\ai.jpg",
+      "PackagePath": "staticwebassets\\lib\\icons\\ai.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\contacts.png",
+      "PackagePath": "staticwebassets\\lib\\icons\\contacts.png"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\datas.jpg",
+      "PackagePath": "staticwebassets\\lib\\icons\\datas.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\game.jpg",
+      "PackagePath": "staticwebassets\\lib\\icons\\game.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\grade.png",
+      "PackagePath": "staticwebassets\\lib\\icons\\grade.png"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\logo-f.png",
+      "PackagePath": "staticwebassets\\lib\\icons\\logo-f.png"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\rating.png",
+      "PackagePath": "staticwebassets\\lib\\icons\\rating.png"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\soft.jpg",
+      "PackagePath": "staticwebassets\\lib\\icons\\soft.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\test.png",
+      "PackagePath": "staticwebassets\\lib\\icons\\test.png"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\update-arrow.png",
+      "PackagePath": "staticwebassets\\lib\\icons\\update-arrow.png"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\user.png",
+      "PackagePath": "staticwebassets\\lib\\icons\\user.png"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\ux.jpg",
+      "PackagePath": "staticwebassets\\lib\\icons\\ux.jpg"
     },
     {
       "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",

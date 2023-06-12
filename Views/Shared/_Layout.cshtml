@@ -10,33 +10,43 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Orient</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index"><img height="15" src="~/lib/icons/logo-f.png"/></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-nav ms-auto mb-2 mb-lg-0 mx-2">
+                    <ul class="navbar-nav mt-2 flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-uppercase text-secondary fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Overview</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="unit1_questions" asp-action="Unit1_Test">Test</a>
+                            <a class="nav-link text-uppercase text-secondary fw-bold" asp-area="" asp-controller="unit1_questions" asp-action="Unit1_Test">Test</a>
+                        </li> 
+                       
+                        <li class="nav-item">
+                            <a class="nav-link text-uppercase text-secondary fw-bold" asp-controller="home" asp-action="logout">
+                                Logout
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8Zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5Z" />
+                                </svg>
+                            </a>
                         </li>
+
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top my-1 footer text-muted">
         <div class="container">
             &copy; 2023 - Orient - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

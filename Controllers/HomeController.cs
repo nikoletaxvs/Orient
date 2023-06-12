@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Orient.Data;
 using Orient.Interfaces;
@@ -82,12 +83,34 @@ namespace Orient.Controllers
         }
         [HttpPost]
         [Route("login")]
-        public IActionResult Login(string username,string password)
+        public IActionResult Login(string username, string password)
         {
+            //Login performed 
             var account = _accountService.Login(username, password);
-            if(account != null)
+            //If login successfull
+            if (account != null)
             {
-                HttpContext.Session.SetString("username",username);
+                //Save username in session
+                HttpContext.Session.SetString("username", username);
+
+                //Get user data 
+                var fullname = _accountService.getFullName(username);
+                var education = _accountService.getEducation(username);
+                var totalPoints = _accountService.getTotalPoints(username);
+                var unit1Times = _accountService.getUnit1Times(username);
+
+                //If user data is fetched successfully ,save it to the session
+                if (fullname != null && education !=null && totalPoints != null && unit1Times !=null)
+                {
+                    HttpContext.Session.SetString("fullname", fullname);
+                    HttpContext.Session.SetString("education", education);
+                    HttpContext.Session.SetInt32("totalPoints", totalPoints);
+                    HttpContext.Session.SetInt32("unit1Times", unit1Times);
+                }
+                else
+                {
+                    HttpContext.Session.SetString("fullname", "Unknown");
+                }
                 return RedirectToAction("welcome");
             }
             else
@@ -101,12 +124,20 @@ namespace Orient.Controllers
         public IActionResult Welcome()
         {
             ViewBag.username=HttpContext.Session.GetString("username");
+            ViewBag.fullname = HttpContext.Session.GetString("fullname");
+            ViewBag.education = HttpContext.Session.GetString("education");
+            ViewBag.totalPoints = HttpContext.Session.GetInt32("totalPoints");
+            ViewBag.unit1Times = HttpContext.Session.GetInt32("unit1Times");
+
             return View("Welcome");
         }
         [Route("logout")]
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("username");
+            HttpContext.Session.Remove("education");
+            HttpContext.Session.Remove("totalPoints");
+            HttpContext.Session.Remove("unit1Times");
             return View("LoginPage");
         }
     }
