@@ -14,9 +14,6 @@ namespace Orient.Models
         public string FullName { get; set; }
         [Required]
         public string EducationLevel { get; set; }
-        [Required]
-        public int TotalPoints { get; set; } 
-        [Required]
-        public int Unit1Times { get; set; }
+      
     }
 }

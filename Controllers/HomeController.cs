@@ -97,16 +97,14 @@ namespace Orient.Controllers
                 //Get user data 
                 var fullname = _accountService.getFullName(username);
                 var education = _accountService.getEducation(username);
-                var totalPoints = _accountService.getTotalPoints(username);
-                var unit1Times = _accountService.getUnit1Times(username);
+               
 
                 //If user data is fetched successfully ,save it to the session
-                if (fullname != null && education !=null && totalPoints != null && unit1Times !=null)
+                if (fullname != null && education !=null)
                 {
                     HttpContext.Session.SetString("fullname", fullname);
                     HttpContext.Session.SetString("education", education);
-                    HttpContext.Session.SetInt32("totalPoints", totalPoints);
-                    HttpContext.Session.SetInt32("unit1Times", unit1Times);
+                    
                 }
                 else
                 {
@@ -127,8 +125,7 @@ namespace Orient.Controllers
             ViewBag.username=HttpContext.Session.GetString("username");
             ViewBag.fullname = HttpContext.Session.GetString("fullname");
             ViewBag.education = HttpContext.Session.GetString("education");
-            ViewBag.totalPoints = HttpContext.Session.GetInt32("totalPoints");
-            ViewBag.unit1Times = HttpContext.Session.GetInt32("unit1Times");
+           
 
             return View("Welcome");
         }
@@ -137,8 +134,7 @@ namespace Orient.Controllers
         {
             HttpContext.Session.Remove("username");
             HttpContext.Session.Remove("education");
-            HttpContext.Session.Remove("totalPoints");
-            HttpContext.Session.Remove("unit1Times");
+          
             return View("LoginPage");
         }
 

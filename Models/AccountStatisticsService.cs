@@ -22,7 +22,9 @@ namespace Orient.Models
         {
             return statistics.ToList();
         }
-        public void Update(int id,AccountStatistics stat)
+        
+
+        public void Update(AccountStatistics statistics)
         {
             throw new NotImplementedException();
         }

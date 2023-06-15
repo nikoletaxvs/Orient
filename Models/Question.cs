@@ -13,6 +13,8 @@ namespace Orient.Models
         public int QuestionId { get; set; }
         [Required]
         public string Content { get; set; }
+        [Required]
+        public string Unit { get; set; }
 
         public virtual ICollection<Answer> Answers { get;set; }
     }

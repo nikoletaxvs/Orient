@@ -9,10 +9,7 @@ namespace Orient.Interfaces
         public string getEducation(string username);
 
 
-        public int getTotalPoints(string username);
-
-
-        public int getUnit1Times(string username);
+      
 
     }
 }

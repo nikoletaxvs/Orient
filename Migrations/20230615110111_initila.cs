@@ -4,23 +4,53 @@
 
 namespace Orient.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initila : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "checkbox_answears",
+                name: "Accounts",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IsChecked = table.Column<bool>(type: "bit", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EducationLevel = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_checkbox_answears", x => x.id);
+                    table.PrimaryKey("PK_Accounts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AccountStatistics",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AccountId = table.Column<int>(type: "int", nullable: false),
+                    softwareEngineeringAttempts = table.Column<int>(type: "int", nullable: false),
+                    softwareEngineeringCompletions = table.Column<int>(type: "int", nullable: false),
+                    softwareEnginneringMeanScore = table.Column<int>(type: "int", nullable: false),
+                    dataScienceingAttempts = table.Column<int>(type: "int", nullable: false),
+                    dataScienceCompletions = table.Column<int>(type: "int", nullable: false),
+                    dataSciencegMeanScore = table.Column<int>(type: "int", nullable: false),
+                    UXAttempts = table.Column<int>(type: "int", nullable: false),
+                    UXCompletions = table.Column<int>(type: "int", nullable: false),
+                    UXMeanScore = table.Column<int>(type: "int", nullable: false),
+                    gameAttempts = table.Column<int>(type: "int", nullable: false),
+                    gameCompletions = table.Column<int>(type: "int", nullable: false),
+                    gameMeanScore = table.Column<int>(type: "int", nullable: false),
+                    msAttempts = table.Column<int>(type: "int", nullable: false),
+                    msCompletions = table.Column<int>(type: "int", nullable: false),
+                    msMeanScore = table.Column<int>(type: "int", nullable: false),
+                    loginCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccountStatistics", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,10 +115,13 @@ namespace Orient.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Answer");
+                name: "Accounts");
 
             migrationBuilder.DropTable(
-                name: "checkbox_answears");
+                name: "AccountStatistics");
+
+            migrationBuilder.DropTable(
+                name: "Answer");
 
             migrationBuilder.DropTable(
                 name: "unit1_Questions");

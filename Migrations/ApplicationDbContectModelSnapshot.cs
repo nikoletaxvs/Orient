@@ -21,6 +21,99 @@ namespace Orient.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Orient.Models.Account", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("EducationLevel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("Orient.Models.AccountStatistics", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UXAttempts")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UXCompletions")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UXMeanScore")
+                        .HasColumnType("int");
+
+                    b.Property<int>("dataScienceCompletions")
+                        .HasColumnType("int");
+
+                    b.Property<int>("dataSciencegMeanScore")
+                        .HasColumnType("int");
+
+                    b.Property<int>("dataScienceingAttempts")
+                        .HasColumnType("int");
+
+                    b.Property<int>("gameAttempts")
+                        .HasColumnType("int");
+
+                    b.Property<int>("gameCompletions")
+                        .HasColumnType("int");
+
+                    b.Property<int>("gameMeanScore")
+                        .HasColumnType("int");
+
+                    b.Property<int>("loginCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("msAttempts")
+                        .HasColumnType("int");
+
+                    b.Property<int>("msCompletions")
+                        .HasColumnType("int");
+
+                    b.Property<int>("msMeanScore")
+                        .HasColumnType("int");
+
+                    b.Property<int>("softwareEngineeringAttempts")
+                        .HasColumnType("int");
+
+                    b.Property<int>("softwareEngineeringCompletions")
+                        .HasColumnType("int");
+
+                    b.Property<int>("softwareEnginneringMeanScore")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AccountStatistics");
+                });
+
             modelBuilder.Entity("Orient.Models.Answer", b =>
                 {
                     b.Property<int>("AnswerId")
@@ -46,30 +139,6 @@ namespace Orient.Migrations
                     b.ToTable("Answer");
                 });
 
-            modelBuilder.Entity("Orient.Models.checkBoxOption", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsChecked")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("checkbox_answears");
-                });
-
             modelBuilder.Entity("Orient.Models.Question", b =>
                 {
                     b.Property<int>("QuestionId")
@@ -79,6 +148,10 @@ namespace Orient.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuestionId"), 1L, 1);
 
                     b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Unit")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
