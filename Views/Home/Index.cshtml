@@ -1,27 +1,63 @@
-﻿@{
+﻿@using System.Linq;
+@{
     ViewData["Title"] = "Home Page";
+    List<Question> questions = new List<Question>();
 }
 @model IEnumerable<Question>
+@{
+    foreach(var q in Model)
+    {
+        questions.Add(q);
 
-<form asp-controller="home" asp-action="Submit">
+
+    }
+    Random random = new Random();
+
+    int n = questions.Count;
+    while (n > 1)
+    {
+        n--;
+        int k = random.Next(n + 1);
+        Question value = questions[k];
+        questions[k] = questions[n];
+        questions[n] = value;
+        
+    }
+    questions.RemoveAt(n);
+}
+<div class="container" style="margin-top:5%;">
+    <form asp-controller="home" asp-action="Submit">
+
     <ol type="1">
-        @foreach(var question in Model)
-        {
             <li>
+          @foreach(var question in questions){
+         
                 @question.Content
-                <input type="hidden" name="questionId" value="@question.QuestionId"/>
-                <ol type="a">
+                    <input type="hidden" name="questionId" value="@question.QuestionId"/>
+                   <ol type="a">
+                   
                     @foreach (var ans in question.Answers)
                     {
-                        <li><input type="radio" name="question_@question.QuestionId" value="@ans.AnswerId" />
-                            @ans.Content</li>
+                            <li>
+                               
+                                    <input type="radio" name="question_@question.QuestionId" value="@ans.AnswerId" />
+                                    @ans.Content
+                               
+                                   
+                              
+                               
+                            </li>
                     }
-                   
-            
+                  
+
                 </ol>
-            </li>
-        }
+            
+           }
+           
+
     </ol>
     <input type="submit" value="Submit" />
 </form> 
+
+</div>
 

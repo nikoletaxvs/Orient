@@ -26,6 +26,15 @@ body {
     letter-spacing: 2px;
     margin-top: 25px;
 }
+h4 {
+    font-size: 45px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 25px;
+    z-index:10;
+    font-weight:400;
+    text-align:center;
+}
 .carousel-caption p{
     width:60%;
     margin:auto;
@@ -35,4 +44,29 @@ body {
 .card-a{
     width:18em;
     height:9em;
+}
+body {
+    font-family: Arial, sans-serif;
+    
+}
+
+h1 {
+    color: #333;
+}
+
+ol {
+    list-style-type: decimal;
+    margin-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+strong {
+    font-weight: bold;
+}
+
+p {
+    margin-top: 20px;
 }

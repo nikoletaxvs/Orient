@@ -13,6 +13,7 @@
          <div class="carousel-caption d-none d-md-block">
              <h5> Welcome <span>@ViewBag.fullname</span>.</h5>
              <p>Orient is your comprehensive career orientation software, designed <br />specifically for computer science students.</p>
+             <br/>
              <p><a class="btn btn-warning mt-3">Discover Our Courses</a></p>
          </div>
     </div>
@@ -117,7 +118,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 col-12"> 
-                <div class="card p-2">
+                <div class="card card-a p-2">
                   <div class="card-content">
                     <div class="card-body">
                       <div class="media d-flex row">
@@ -151,51 +152,54 @@
         <div class="card mx-3">
             <img src="/lib/icons/ai.jpg" class="card-img-top" alt="ai" style="filter:brightness(0.5);">
             <div class="card-body">
-                <h5 class="card-title">Machine Learning</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <h5 class="card-title fw-bold" style="color:#3A3B3C">Machine Learning</h5>
+                <p class="card-text text-secondary">Machine Learning is an AI technique that teaches computers to learn from experience. </p>
+               
             </div>
-            <div class="card-footer">
-                <small class="text-body-secondary">Last updated 3 mins ago</small>
+            <div class="d-grid gap-2">
+                <a asp-controller="home" asp-action="MachineLearning" class="btn btn-warning shadow-sm fw-bold p-3" style="color:#3A3B3C">Explore Path</a>
             </div>
+           
         </div>
         <div class="card mx-3">
             <img src="/lib/icons/soft.jpg" class="card-img-top" alt="..." style="filter:brightness(0.5);">
             <div class="card-body">
-                <h5 class="card-title">Software Engineering</h5>
+                <h5 class="card-title fw-bold" style="color:#3A3B3C">Software Engineering</h5>
                 <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
             </div>
-            <div class="card-footer">
-                <small class="text-body-secondary">Last updated 3 mins ago</small>
+            <div class="d-grid gap-2">
+                <a asp-controller="home" asp-action="SoftwareEngineering" class="btn btn-warning shadow-sm fw-bold p-3" style="color:#3A3B3C">Explore Path</a>
             </div>
         </div>
         <div class="card mx-3">
             <img src="lib/icons/datas.jpg" class="card-img-top" alt="..." style="filter:brightness(0.5);">
             <div class="card-body">
-                <h5 class="card-title">Data Science</h5>
+                <h5 class="card-title fw-bold" style="color:#3A3B3C">Data Science</h5>
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+              
             </div>
-            <div class="card-footer">
-                <small class="text-body-secondary">Last updated 3 mins ago</small>
+            <div class="d-grid gap-2">
+                <a asp-controller="home" asp-action="DataScience"  class="btn btn-warning shadow-sm fw-bold p-3" style="color:#3A3B3C">Explore Path</a>
             </div>
         </div>
          <div class="card mx-3">
             <img src="lib/icons/ux.jpg" class="card-img-top" alt="..." style="filter:brightness(0.5);">
             <div class="card-body">
-                <h5 class="card-title">UX Design</h5>
+                <h5 class="card-title fw-bold" style="color:#3A3B3C">UX Design</h5>
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
             </div>
-            <div class="card-footer">
-                <small class="text-body-secondary">Last updated 3 mins ago</small>
+            <div class="d-grid gap-2">
+                <a asp-controller="home" asp-action="UXDesigner" class="btn btn-warning shadow-sm fw-bold p-3" style="color:#3A3B3C">Explore Path</a>
             </div>
         </div>
         <div class="card mx-3">
             <img src="lib/icons/game.jpg" class="card-img-top" alt="..." style="filter:brightness(0.5);">
             <div class="card-body">
-                <h5 class="card-title">Game Developer</h5>
+                <h5 class="card-title fw-bold" style="color:#3A3B3C">Game Developer</h5>
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
             </div>
-            <div class="card-footer">
-                <small class="text-body-secondary">Last updated 3 mins ago</small>
+            <div class="d-grid gap-2">
+                <a asp-controller="home" asp-action="GameDev" class="btn btn-warning shadow-sm fw-bold p-3" style="color:#3A3B3C">Explore Path</a>
             </div>
         </div>
     </div>

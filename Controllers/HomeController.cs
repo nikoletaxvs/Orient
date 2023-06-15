@@ -44,16 +44,17 @@ namespace Orient.Controllers
             List<bool> correctAns = new List<bool>();
             bool correct;
             int score = 0;
+            List<Question> questionsGiven = new List<Question>();
             List<Answer> currentAnswers = new List<Answer>();
             string[] questionAnswers = iformCollection["questionId"];
-            
+            foreach(var qId in questionAnswers)
+            {
+                questionsGiven.Add(_db.Questions.Where(q => q.QuestionId == int.Parse(qId)).FirstOrDefault());
+            }
             foreach(var q in questionAnswers)
             {
                //Getting the correct answer for each question from the database
-                Answer answerIdCorrect = _db.Answers
-                    .Where(r => r.QuestionId == int.Parse(q))
-                    .Where(a => a.Correct == true)
-                    .FirstOrDefault();
+                Answer answerIdCorrect = _db.Answers.Where(r => r.QuestionId == int.Parse(q)).Where(a => a.Correct == true).FirstOrDefault();
                 int givenAnswerId = int.Parse(iformCollection["question_" + q]);
                 currentAnswers.Add(_db.Answers.Where(s => s.AnswerId == givenAnswerId).FirstOrDefault());
                 if (answerIdCorrect.AnswerId ==givenAnswerId)
@@ -67,7 +68,7 @@ namespace Orient.Controllers
                 }
                correctAns.Add(correct);
             }
-            ViewBag.A = new Reply() { TotalScore = score, QuestionList = _db.Questions.ToList(), AnswersList = currentAnswers, correctAnswers = correctAns };
+            ViewBag.A = new Reply() { TotalScore = score, QuestionList = questionsGiven.ToList(), AnswersList = currentAnswers, correctAnswers = correctAns };
             return View("Report");
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -140,5 +141,29 @@ namespace Orient.Controllers
             HttpContext.Session.Remove("unit1Times");
             return View("LoginPage");
         }
+
+        public IActionResult SoftwareEngineering()
+        {
+            return View();
+        }
+        public IActionResult DataScience()
+        {
+            return View();
+        }
+
+        public IActionResult MachineLearning()
+        {
+            return View();
+        }
+
+        public IActionResult UXDesigner()
+        {
+            return View();
+        }
+        public IActionResult GameDev()
+        {
+            return View();
+        }
     }
+
 }

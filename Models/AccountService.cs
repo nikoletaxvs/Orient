@@ -10,15 +10,17 @@ namespace Orient.Models
         public AccountService() { 
             Accounts=new List<Account>() {
                 new Account() {
+                    Id= 1,
                     UserName="user1",
                     Password="123",
-                    FullName="Maria Apalahidou",
+                    FullName="Adelina Kazantzidi",
                     EducationLevel="Undergraduate",
                     TotalPoints=1,
                     Unit1Times=0
                 },
                 new Account()
                 {
+                    Id= 2,
                     UserName="user2",
                     Password="123",
                     FullName="Nikol Koliatsou",

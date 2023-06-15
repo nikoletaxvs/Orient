@@ -11,6 +11,7 @@ namespace Orient.Data
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Question> Questions { get; set; }
 
-       
+       public DbSet<Account> Accounts { get; set; }
+       public DbSet<AccountStatistics> AccountStatistics { get; set; }
     }
 }

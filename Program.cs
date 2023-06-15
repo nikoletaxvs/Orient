@@ -19,6 +19,7 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(120);
 });
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IAccountStatistics, AccountStatisticsService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
