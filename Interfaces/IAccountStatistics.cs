@@ -5,7 +5,7 @@ namespace Orient.Interfaces
     public interface IAccountStatistics
     {
         public void Update(AccountStatistics statistics);
-        public AccountStatistics Get(int id);
         public IEnumerable<AccountStatistics> GetAll();
+        public AccountStatistics GetByAccountId(int id);
     }
 }

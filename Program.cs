@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Orient.Data;
 using Orient.Interfaces;
-using Orient.Models;
+using Orient.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

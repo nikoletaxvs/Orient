@@ -12,22 +12,25 @@ namespace Orient.Controllers
     public class HomeController : Controller
     {
         private IAccountService _accountService;
+        private IAccountStatistics _accountStatistics;
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor _ctx;
         private readonly ApplicationDbContect _db;
         List<string> answearList = new List<string>();
-        public HomeController(ILogger<HomeController> logger,IHttpContextAccessor ctx, ApplicationDbContect db, IAccountService accountService)
+        public HomeController(ILogger<HomeController> logger,IHttpContextAccessor ctx, ApplicationDbContect db, IAccountService accountService, IAccountStatistics accountStatistics)
         {
             _logger = logger;
             _ctx = ctx;
             _db = db;
             _accountService = accountService;
+            _accountStatistics = accountStatistics;
         }
 
         public IActionResult Index()
         {
             ViewBag.Questions = _db.Questions.ToList();
             IEnumerable<Question> model = _db.Questions.Include(n => n.Answers).ToList();
+            TempData.Keep("CurrentTest");
             return View(model);
         }
        
@@ -37,16 +40,30 @@ namespace Orient.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [Route("submit")] 
         public IActionResult Submit(IFormCollection iformCollection)
         {
+           //Keeps track of whether an answer is correct or not foreach question
             List<bool> correctAns = new List<bool>();
+
+            //Keeps track of the 
             bool correct;
+
+            //Keeps track of the score
             int score = 0;
+
+            //This list keeps the answers who got choosen randomly
             List<Question> questionsGiven = new List<Question>();
+
+            //Keeps track of the given answers 
             List<Answer> currentAnswers = new List<Answer>();
+
+            // List of the id numbers of the questions
             string[] questionAnswers = iformCollection["questionId"];
+
+            // Checking and computing score
             foreach(var qId in questionAnswers)
             {
                 questionsGiven.Add(_db.Questions.Where(q => q.QuestionId == int.Parse(qId)).FirstOrDefault());
@@ -68,6 +85,26 @@ namespace Orient.Controllers
                 }
                correctAns.Add(correct);
             }
+            
+             //Update total engineering stats
+            int accountId = (int)HttpContext.Session.GetInt32("id");
+            AccountStatistics entry = _accountStatistics.GetByAccountId(accountId);
+            int softwareEngineeringAttempts = entry.softwareEngineeringAttempts + 1;
+            if(score > 1)
+            {
+                int softwareEngineeringCompletions = entry.softwareEngineeringCompletions + 1;
+                entry.softwareEngineeringCompletions = softwareEngineeringCompletions;
+            }
+            int softwareEngineeringMean = entry.softwareEnginneringMeanScore + softwareEngineeringAttempts * score;
+            entry.softwareEngineeringAttempts = softwareEngineeringAttempts;
+            entry.softwareEnginneringMeanScore = softwareEngineeringMean;
+            _accountStatistics.Update(entry);
+           
+           
+
+           
+            
+            //The results are kept in this viewbag
             ViewBag.A = new Reply() { TotalScore = score, QuestionList = questionsGiven.ToList(), AnswersList = currentAnswers, correctAnswers = correctAns };
             return View("Report");
         }
@@ -95,20 +132,34 @@ namespace Orient.Controllers
                 HttpContext.Session.SetString("username", username);
 
                 //Get user data 
+                var accountId = _accountService.getAccountId(username);
                 var fullname = _accountService.getFullName(username);
                 var education = _accountService.getEducation(username);
-               
+                
 
                 //If user data is fetched successfully ,save it to the session
-                if (fullname != null && education !=null)
+                if (fullname != null && education !=null && accountId !=null)
                 {
+                    //Update login count
+                    AccountStatistics entry=_accountStatistics.GetByAccountId(accountId);
+                    int loginc = entry.loginCount +1;
+                    entry.loginCount = loginc;
+                    _accountStatistics.Update(entry);
+
+                    //Set session variables
+                    HttpContext.Session.SetInt32("id", accountId);
+                    HttpContext.Session.SetInt32("loginCount", loginc);
                     HttpContext.Session.SetString("fullname", fullname);
                     HttpContext.Session.SetString("education", education);
+                    
                     
                 }
                 else
                 {
+
+                    HttpContext.Session.SetInt32("fullname", 0);
                     HttpContext.Session.SetString("fullname", "Unknown");
+                    HttpContext.Session.SetString("education", "Unknown");
                 }
                 return RedirectToAction("welcome");
             }
@@ -125,39 +176,53 @@ namespace Orient.Controllers
             ViewBag.username=HttpContext.Session.GetString("username");
             ViewBag.fullname = HttpContext.Session.GetString("fullname");
             ViewBag.education = HttpContext.Session.GetString("education");
-           
+            ViewBag.loginCount = HttpContext.Session.GetInt32("loginCount");
 
+            var totalpoints = 0;
+            int accountId = (int)HttpContext.Session.GetInt32("id");
+            var account =_accountStatistics.GetByAccountId(accountId);
+            totalpoints += account.softwareEnginneringMeanScore;
+            ViewBag.softwareEngineeringAttempts = account.softwareEngineeringAttempts;
+            ViewBag.TotalPoints = totalpoints;
             return View("Welcome");
         }
         [Route("logout")]
         public IActionResult Logout()
         {
+            HttpContext.Session.Remove("id");
             HttpContext.Session.Remove("username");
+            HttpContext.Session.Remove("fullname");
             HttpContext.Session.Remove("education");
+            HttpContext.Session.Remove("loginCount");
           
             return View("LoginPage");
         }
 
         public IActionResult SoftwareEngineering()
         {
+            TempData["CurrentTest"] = "Software Engineering";
             return View();
         }
         public IActionResult DataScience()
         {
+            TempData["CurrentTest"] = "data science";
             return View();
         }
 
         public IActionResult MachineLearning()
         {
+            TempData["CurrentTest"] = "machine learning";
             return View();
         }
 
         public IActionResult UXDesigner()
         {
+            TempData["CurrentTest"] = "UX";
             return View();
         }
         public IActionResult GameDev()
         {
+            TempData["CurrentTest"] = "game";
             return View();
         }
     }

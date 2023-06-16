@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "pE4Y2mS/XvU5XnPbpBJkPGDXu4Npw3e/YI2Sz57+L+g=",
+  "Hash": "KBTDDBkZ7mNlvgJJwH8tQTMMTFFNS6eaSdQAokk73MI=",
   "Source": "Orient",
   "BasePath": "_content/Orient",
   "Mode": "Default",
@@ -935,6 +935,23 @@
       "OriginalItemSpec": "wwwroot\\lib\\icons\\datas.jpg"
     },
     {
+      "Identity": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\dislike.png",
+      "SourceId": "Orient",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\",
+      "BasePath": "_content/Orient",
+      "RelativePath": "lib/icons/dislike.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\icons\\dislike.png"
+    },
+    {
       "Identity": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\game.jpg",
       "SourceId": "Orient",
       "SourceType": "Discovered",
@@ -984,6 +1001,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\icons\\logo-f.png"
+    },
+    {
+      "Identity": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\notDone.png",
+      "SourceId": "Orient",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\",
+      "BasePath": "_content/Orient",
+      "RelativePath": "lib/icons/notDone.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\icons\\notDone.png"
     },
     {
       "Identity": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\rating.png",
@@ -1086,6 +1120,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\icons\\ux.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\wellDone.png",
+      "SourceId": "Orient",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\",
+      "BasePath": "_content/Orient",
+      "RelativePath": "lib/icons/wellDone.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\icons\\wellDone.png"
     },
     {
       "Identity": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\jquery\\dist\\jquery.js",

@@ -90,7 +90,7 @@
                                     <img height="40" src="~/lib/icons/rating.png" />
                                 </div>
                                 <div class="media-body col text-end">
-                                        <h3>@ViewBag.totalPoints</h3>
+                                        <h3>@ViewBag.TotalPoints</h3>
                                     <span style="color:#3A3B3C">Points Earned</span>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                     <img height="40" src="~/lib/icons/contacts.png" />
                                 </div>
                                 <div class="media-body col text-end">
-                                    <h3>278</h3>
+                                    <h3>@ViewBag.loginCount</h3>
                                     <span style="color:#3A3B3C">Participated In Program</span>
                                 </div>
                             </div>
@@ -154,7 +154,26 @@
             <div class="card-body">
                 <h5 class="card-title fw-bold" style="color:#3A3B3C">Machine Learning</h5>
                 <p class="card-text text-secondary">Machine Learning is an AI technique that teaches computers to learn from experience. </p>
-               
+                 <div class="container">
+                     <div class="row">
+
+                         <div class="col">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 -4 25 25">
+                                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+                                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+                            </svg> @ViewBag.softwareEngineeringAttempts
+                         </div>
+                        @if(ViewBag.TotalPoints > 0)
+                        {
+                            <img src="/lib/icons/dislike.png" height="25" class="col-3" />
+                        }
+                        else{
+
+                             <img src="/lib/icons/notDone.png" class="col-4"/>
+                        }
+
+                     </div>
+                 </div>
             </div>
             <div class="d-grid gap-2">
                 <a asp-controller="home" asp-action="MachineLearning" class="btn btn-warning shadow-sm fw-bold p-3" style="color:#3A3B3C">Explore Path</a>

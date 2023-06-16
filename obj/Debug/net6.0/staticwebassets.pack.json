@@ -213,6 +213,10 @@
       "PackagePath": "staticwebassets\\lib\\icons\\datas.jpg"
     },
     {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\dislike.png",
+      "PackagePath": "staticwebassets\\lib\\icons\\dislike.png"
+    },
+    {
       "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\game.jpg",
       "PackagePath": "staticwebassets\\lib\\icons\\game.jpg"
     },
@@ -223,6 +227,10 @@
     {
       "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\logo-f.png",
       "PackagePath": "staticwebassets\\lib\\icons\\logo-f.png"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\notDone.png",
+      "PackagePath": "staticwebassets\\lib\\icons\\notDone.png"
     },
     {
       "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\rating.png",
@@ -247,6 +255,10 @@
     {
       "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\ux.jpg",
       "PackagePath": "staticwebassets\\lib\\icons\\ux.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\wellDone.png",
+      "PackagePath": "staticwebassets\\lib\\icons\\wellDone.png"
     },
     {
       "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",

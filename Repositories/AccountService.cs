@@ -1,20 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Orient.Data;
 using Orient.Interfaces;
+using Orient.Models;
 using System;
 using System.Linq;
 
-namespace Orient.Models
+namespace Orient.Repositories
 {
     public class AccountService : IAccountService
     {
         private readonly ApplicationDbContect _dbContext;
         public List<Account> Accounts;
-        
-        public AccountService(ApplicationDbContect dbContext) {
+
+        public AccountService(ApplicationDbContect dbContext)
+        {
             _dbContext = dbContext;
-            Accounts = GetAccounts();  
-           
+            Accounts = GetAccounts();
+
         }
         public List<Account> GetAccounts()
         {
@@ -24,10 +26,16 @@ namespace Orient.Models
         {
             return Accounts.SingleOrDefault(a => a.UserName == username && a.Password == password);
         }
-        public string getFullName(string username) {
+        public int getAccountId(string username)
+        {
+            return _dbContext.Accounts.SingleOrDefault(a => a.UserName == username).Id;
+        }
+        public string getFullName(string username)
+        {
             return Accounts.SingleOrDefault(a => a.UserName == username).FullName;
         }
-        public string getEducation(string username) {
+        public string getEducation(string username)
+        {
             return Accounts.SingleOrDefault(a => a.UserName == username).EducationLevel;
         }
     }
