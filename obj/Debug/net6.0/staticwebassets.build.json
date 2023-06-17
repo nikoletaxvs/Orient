@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KBTDDBkZ7mNlvgJJwH8tQTMMTFFNS6eaSdQAokk73MI=",
+  "Hash": "tEu3BNrl6RAzNgdkLwVQ/cjwAUXcJ3WuKNw4Mrteqh8=",
   "Source": "Orient",
   "BasePath": "_content/Orient",
   "Mode": "Default",
@@ -901,6 +901,23 @@
       "OriginalItemSpec": "wwwroot\\lib\\icons\\ai.jpg"
     },
     {
+      "Identity": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\bad-feedback.png",
+      "SourceId": "Orient",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\",
+      "BasePath": "_content/Orient",
+      "RelativePath": "lib/icons/bad-feedback.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\icons\\bad-feedback.png"
+    },
+    {
       "Identity": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\contacts.png",
       "SourceId": "Orient",
       "SourceType": "Discovered",
@@ -984,6 +1001,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\icons\\grade.png"
+    },
+    {
+      "Identity": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\lock.png",
+      "SourceId": "Orient",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\",
+      "BasePath": "_content/Orient",
+      "RelativePath": "lib/icons/lock.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\icons\\lock.png"
     },
     {
       "Identity": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\logo-f.png",

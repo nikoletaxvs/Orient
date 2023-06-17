@@ -7,7 +7,7 @@
 @{
     foreach(var q in Model)
     {
-        //this check makes sure that only questions of one unit get selected
+        //this check makes sure that tests have correct unit questions (only of that unit)
         if (q.Unit == TempData["CurrentTest"] as string)
         {
             questions.Add(q);
@@ -28,7 +28,7 @@
         questions[n] = value;
         
     }
-    //questions.RemoveAt(n);
+    questions.RemoveAt(n);
 }
 <div class="container" style="margin-top:5%;">
     <form asp-controller="home" asp-action="Submit">

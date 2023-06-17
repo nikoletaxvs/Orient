@@ -205,6 +205,10 @@
       "PackagePath": "staticwebassets\\lib\\icons\\ai.jpg"
     },
     {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\bad-feedback.png",
+      "PackagePath": "staticwebassets\\lib\\icons\\bad-feedback.png"
+    },
+    {
       "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\contacts.png",
       "PackagePath": "staticwebassets\\lib\\icons\\contacts.png"
     },
@@ -223,6 +227,10 @@
     {
       "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\grade.png",
       "PackagePath": "staticwebassets\\lib\\icons\\grade.png"
+    },
+    {
+      "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\lock.png",
+      "PackagePath": "staticwebassets\\lib\\icons\\lock.png"
     },
     {
       "Id": "C:\\Users\\vvlac\\source\\repos\\Orient\\wwwroot\\lib\\icons\\logo-f.png",

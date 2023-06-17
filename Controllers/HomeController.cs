@@ -178,12 +178,63 @@ namespace Orient.Controllers
             ViewBag.education = HttpContext.Session.GetString("education");
             ViewBag.loginCount = HttpContext.Session.GetInt32("loginCount");
 
-            var totalpoints = 0;
+            //getting account statistics
             int accountId = (int)HttpContext.Session.GetInt32("id");
-            var account =_accountStatistics.GetByAccountId(accountId);
-            totalpoints += account.softwareEnginneringMeanScore;
+            var account = _accountStatistics.GetByAccountId(accountId);
+
+            //calculating total points statistic
+            var totalAttempts = 0;
+            totalAttempts += account.softwareEnginneringMeanScore;
+            totalAttempts += account.dataSciencegMeanScore;
+            totalAttempts += account.UXMeanScore;
+            totalAttempts += account.gameMeanScore;
+            totalAttempts += account.msMeanScore;
+
+            //calculate completed tests
+            var completedTests = 0;
+            List<int> meanScores = new List<int>();
+            meanScores.Add(account.softwareEnginneringMeanScore);
+            meanScores.Add(account.dataSciencegMeanScore);
+            meanScores.Add(account.UXMeanScore);
+            meanScores.Add(account.gameMeanScore);
+            meanScores.Add(account.msMeanScore);
+            foreach (var score in meanScores)
+            {
+                if (score > 5)
+                {
+                    completedTests++;
+                }
+            }
+
+
+            //calculating average score statistic
+            var averageScore = 0;
+            averageScore += account.softwareEnginneringMeanScore;
+            averageScore += account.dataSciencegMeanScore;
+            averageScore += account.UXMeanScore;
+            averageScore += account.gameMeanScore;
+            averageScore += account.msMeanScore;
+            averageScore = averageScore / completedTests;
+
+           
+            //populating ViewBag with data
+            ViewBag.totalAttempts = totalAttempts;
+            ViewBag.averageScore = averageScore;
+
             ViewBag.softwareEngineeringAttempts = account.softwareEngineeringAttempts;
-            ViewBag.TotalPoints = totalpoints;
+            ViewBag.msAttempts = account.msAttempts;
+            ViewBag.gameAttempts = account.gameAttempts;
+            ViewBag.dsAttempts = account.dataScienceingAttempts;
+            ViewBag.uxAttempts = account.UXAttempts;
+
+            ViewBag.msMean = account.msMeanScore;
+            ViewBag.seMean = account.softwareEnginneringMeanScore;
+            ViewBag.uxMean = account.UXMeanScore;
+            ViewBag.gmMean = account.gameMeanScore;
+            ViewBag.dsMean = account.dataSciencegMeanScore;
+           
+            ViewBag.completedTests = completedTests;
+
             return View("Welcome");
         }
         [Route("logout")]

@@ -12,9 +12,9 @@
          <img style="height:100vh;width:100vw;object-fit:cover;filter:brightness(0.3);" src="~/lib/icons/datas.jpg" />
          <div class="carousel-caption d-none d-md-block">
              <h5> Welcome <span>@ViewBag.fullname</span>.</h5>
-             <p>Orient is your comprehensive career orientation software, designed <br />specifically for computer science students.</p>
+             <p class="mt-1">Orient is your comprehensive career orientation software, designed <br />specifically for computer science students.</p>
              <br/>
-             <p><a class="btn btn-warning mt-3">Discover Our Courses</a></p>
+             <p class="mt-3" style="filter:brightness(0.8);"><a class="btn btn-warning mt-3 p-3 fw-bold text-light">Discover Our Courses</a></p>
          </div>
     </div>
     <div class="carousel-item ">
@@ -22,7 +22,7 @@
      <div class="carousel-caption d-none d-md-block">
              <h5>Discover opportunities.</h5>
              <p>Orient is your comprehensive career orientation software, designed <br />specifically for computer science students.</p>
-                    <p><a class="btn btn-warning mt-3">Discover Our Courses</a></p>
+                    <p class="mt-3" style="filter:brightness(0.8);"><a class="btn btn-warning mt-3 p-3 fw-bold text-light">Discover Our Courses</a></p>
          </div>
     </div>
     <div class="carousel-item">
@@ -30,7 +30,7 @@
      <div class="carousel-caption d-none d-md-block">
              <h5>Test your skills.</h5>
              <p>Orient is your comprehensive career orientation software, designed <br />specifically for computer science students.</p>
-                    <p><a class="btn btn-warning mt-3">Discover Our Courses</a></p>
+                    <p class="mt-3" style="filter:brightness(0.8);"><a class="btn btn-warning mt-3 p-3 fw-bold text-light">Discover Our Courses</a></p>
          </div>
     </div>
             <div class="carousel-item">
@@ -38,7 +38,7 @@
                 <div class="carousel-caption d-none d-md-block">
                     <h5> Achieve your dreams.</h5>
                     <p>Orient is your comprehensive career orientation software, designed <br />specifically for computer science students.</p>
-                    <p><a class="btn btn-warning mt-3">Discover Our Courses</a></p>
+                    <p class="mt-3" style="filter:brightness(0.8);"><a class="btn btn-warning mt-3 p-3 fw-bold text-light">Discover Our Courses</a></p>
                 </div>
             </div>
   </div>
@@ -72,7 +72,7 @@
                            <img height="40" src="~/lib/icons/test.png" />
                         </div>
                         <div class="media-body col text-end">
-                          <h3 >278</h3>
+                                        <h3>@ViewBag.completedTests</h3>
                              <span style="color:#3A3B3C">Tests Completed</span>
                         </div>
                       </div>
@@ -90,8 +90,8 @@
                                     <img height="40" src="~/lib/icons/rating.png" />
                                 </div>
                                 <div class="media-body col text-end">
-                                        <h3>@ViewBag.TotalPoints</h3>
-                                    <span style="color:#3A3B3C">Points Earned</span>
+                                        <h3>@ViewBag.totalAttempts</h3>
+                                    <span style="color:#3A3B3C">Total Attempts</span>
                                 </div>
                             </div>
                            
@@ -126,8 +126,8 @@
                            <img height="40" src="~/lib/icons/grade.png" />
                         </div>
                         <div class="media-body col text-end">
-                          <h3 >278</h3>
-                             <span style="color:#3A3B3C">Average Points</span>
+                          <h3 >@ViewBag.averageScore</h3>
+                             <span style="color:#3A3B3C">Average Score</span>
                         </div>
                       </div>
                            
@@ -150,30 +150,40 @@
 <div class="container">
     <div class="card-group p-1">
         <div class="card mx-3">
+            <div class="card-header">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col">
+                            <i class="fi fi-br-time-past"></i><span class="small p-1 mb-2">@ViewBag.msMeanScore</span>
+                        </div>
+                             
+                        @if (ViewBag.msAttempts > 0)
+                        {
+                            @if(ViewBag.msMean > 5)
+                            {
+                                <i class="fi fi-rr-face-disappointed col-3"></i>
+                            }else{
+                                <i class="fi fi-rr-face-awesome"></i>
+                            }
+                            
+                        }
+                        else
+                        {
+
+                            <i class="fi fi-sr-lock col-3"></i>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
             <img src="/lib/icons/ai.jpg" class="card-img-top" alt="ai" style="filter:brightness(0.5);">
             <div class="card-body">
                 <h5 class="card-title fw-bold" style="color:#3A3B3C">Machine Learning</h5>
                 <p class="card-text text-secondary">Machine Learning is an AI technique that teaches computers to learn from experience. </p>
-                 <div class="container">
-                     <div class="row">
-
-                         <div class="col">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 -4 25 25">
-                                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
-                                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
-                            </svg> @ViewBag.softwareEngineeringAttempts
-                         </div>
-                        @if(ViewBag.TotalPoints > 0)
-                        {
-                            <img src="/lib/icons/dislike.png" height="25" class="col-3" />
-                        }
-                        else{
-
-                             <img src="/lib/icons/notDone.png" class="col-4"/>
-                        }
-
-                     </div>
-                 </div>
+                 
+               
             </div>
             <div class="d-grid gap-2">
                 <a asp-controller="home" asp-action="MachineLearning" class="btn btn-warning shadow-sm fw-bold p-3" style="color:#3A3B3C">Explore Path</a>
@@ -181,41 +191,137 @@
            
         </div>
         <div class="card mx-3">
+            <div class="card-header">
+                  <div class="container">
+                    <div class="row">
+
+                        <div class="col">
+                            <i class="fi fi-br-time-past"></i><span class="small p-1 mb-2">@ViewBag.softwareEngineeringAttempts</span>
+                        </div>
+                        @if (ViewBag.totalAttempts > 0)
+                        {
+                            <i class="col-3 fi fi-rr-face-disappointed"></i>
+                        }
+                        else
+                        {
+
+                            <i class=" col-3 fi fi-sr-lock"></i>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
             <img src="/lib/icons/soft.jpg" class="card-img-top" alt="..." style="filter:brightness(0.5);">
             <div class="card-body">
                 <h5 class="card-title fw-bold" style="color:#3A3B3C">Software Engineering</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text text-secondary">Software engineering is the branch of computer science that deals with the design, development, testing, and maintenance of software applications.</p>
+              
             </div>
-            <div class="d-grid gap-2">
-                <a asp-controller="home" asp-action="SoftwareEngineering" class="btn btn-warning shadow-sm fw-bold p-3" style="color:#3A3B3C">Explore Path</a>
-            </div>
+            @if(ViewBag.totalAttempts < 0)
+            {
+                <div class="d-grid gap-2">
+                    <a asp-controller="home" asp-action="SoftwareEngineering" class="btn btn-warning shadow-sm fw-bold p-3" style="color:#3A3B3C">Explore Path</a>
+                </div>
+            }
+            else
+            {
+                <div class="d-grid gap-2">
+                    <div class="btn btn-secondary shadow-sm fw-bold p-3" style="color:#3A3B3C"> Path Locked</div>
+                </div>
+            }
+            
         </div>
         <div class="card mx-3">
+            <div class="card-header">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col">
+                            <i class="fi fi-br-time-past"></i><span class="small p-1 mb-2"> @ViewBag.softwareEngineeringAttempts</span>
+                        </div>
+                        @if (ViewBag.totalAttempts > 0)
+                        {
+                            <i class="col-3 fi fi-rr-face-disappointed"></i>
+                        }
+                        else
+                        {
+
+                            <i class=" col-3 fi fi-sr-lock"></i>
+                        }
+
+
+
+                    </div>
+                </div>
+            </div>
             <img src="lib/icons/datas.jpg" class="card-img-top" alt="..." style="filter:brightness(0.5);">
             <div class="card-body">
                 <h5 class="card-title fw-bold" style="color:#3A3B3C">Data Science</h5>
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-              
+               
             </div>
             <div class="d-grid gap-2">
                 <a asp-controller="home" asp-action="DataScience"  class="btn btn-warning shadow-sm fw-bold p-3" style="color:#3A3B3C">Explore Path</a>
             </div>
         </div>
          <div class="card mx-3">
+            <div class="card-header">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col">
+                            <i class="fi fi-br-time-past"></i><span class="small p-1 mb-2"> @ViewBag.softwareEngineeringAttempts</span>
+                        </div>
+                        @if (ViewBag.totalAttempts > 0)
+                        {
+                            <i class="col-3 fi fi-rr-face-disappointed"></i>
+                        }
+                        else
+                        {
+
+                            <i class=" col-3 fi fi-sr-lock"></i>
+                        }
+
+                    </div>
+                </div>
+            </div>
             <img src="lib/icons/ux.jpg" class="card-img-top" alt="..." style="filter:brightness(0.5);">
             <div class="card-body">
                 <h5 class="card-title fw-bold" style="color:#3A3B3C">UX Design</h5>
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+               
             </div>
             <div class="d-grid gap-2">
                 <a asp-controller="home" asp-action="UXDesigner" class="btn btn-warning shadow-sm fw-bold p-3" style="color:#3A3B3C">Explore Path</a>
             </div>
         </div>
         <div class="card mx-3">
+            <div class="card-header">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col">
+                            <i class="fi fi-br-time-past"></i><span class="small p-1 mb-2"> @ViewBag.softwareEngineeringAttempts</span>
+                        </div>
+                        @if (ViewBag.totalAttempts > 0)
+                        {
+                            <i class="col-3 fi fi-rr-face-disappointed"></i>
+                        }
+                        else
+                        {
+
+                            <i class=" col-3 fi fi-sr-lock"></i>
+                        }
+
+                    </div>
+                </div>
+            </div>
             <img src="lib/icons/game.jpg" class="card-img-top" alt="..." style="filter:brightness(0.5);">
             <div class="card-body">
                 <h5 class="card-title fw-bold" style="color:#3A3B3C">Game Developer</h5>
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+
             </div>
             <div class="d-grid gap-2">
                 <a asp-controller="home" asp-action="GameDev" class="btn btn-warning shadow-sm fw-bold p-3" style="color:#3A3B3C">Explore Path</a>
