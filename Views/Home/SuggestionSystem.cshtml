@@ -1,0 +1,69 @@
+﻿
+@{
+    Layout = "_Layout";
+}
+@model IEnumerable<DaySector>
+@{
+    List<DaySector> daySectors = new List<DaySector>();
+    foreach (var s in Model)
+    {
+
+        daySectors.Add(s);
+    }
+    string[] story = { " Once upon a time, in the bustling city of Technoville,you embarked on another typical day at your workplace. The morning sun illuminated the skyline as you stepped into the modern office building. It was just about time for:",
+        " With a cup of freshly brewed coffee in hand, you delved into your first task.Which was:" ,
+    "Armed with a clear plan, you dive into working. You are working on developing new features for the an application, focusing on:",
+    " After taking a well-deserved break and enjoying a healthy lunch. You take a short walk outside to clear your mind and recharge for the afternoon session.Which includes:",
+    "As the workday draws to a close your final task is:"};
+   
+
+}
+<img style="height:70vh;width:100vw;object-fit:cover;filter:brightness(0.3);z-index:0;" src="https://img.freepik.com/free-photo/closeup-shot-person-holding-compass-with-burred-background_181624-4493.jpg?w=1380&t=st=1687108419~exp=1687109019~hmac=de1c42f96d6c695f391e4dbed2cda453e055d480020a43740aeb8b42f334fb5a" />
+
+<div class="container pt-4">
+    <h3 class="fw-bold"><i class="fi fi-rs-plane-departure"></i> Career Suggesions Journey </h3>
+    <h5>
+        @ViewBag.username here you will visualize your future daily life and choose what is best for you. When the test is complete our system will
+        match you to a career based on your test scores and what you like.Let's begin!
+    </h5>
+   
+    
+    <form asp-controller="home" asp-action="Suggest">
+    <div class="container">
+        @foreach (var s in daySectors)
+        {
+            <p style="font-size:16px;">
+                @story[s.DaySectorId-1]
+            </p>
+            <div class="row my-3">
+                <input type="hidden" name="sectionId" value="@s.DaySectorId" />
+                @foreach (var p in s.Parts)
+                {
+                    <div class="col">
+                        <div class="radio-tile-group">
+                            <div class="input-container">
+                                <input id="walk" class="radio-button" type="radio" name="section_@s.DaySectorId" value="@p.PartId" checked="checked"/>
+                                <div class="radio-tile">
+                                        <div class=" row icon walk-icon  d-flex aligns-items-center justify-content-center">
+                                            @{
+                                                var temp = "/lib/icons/" + p.PartCareer + "/" + @s.DaySectorId + ".png";
+                                            }
+                                        <img class="col-5" src="@temp"/>
+                                    </div>
+                                    <label for="walk" class="radio-tile-label">@p.PartText</label>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                }
+            </div>
+
+        }
+        <div ></div>
+    </div>
+
+        <input type="submit" value="Submit" />
+    </form>
+</div>

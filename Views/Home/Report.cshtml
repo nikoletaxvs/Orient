@@ -17,9 +17,22 @@
     {
         @if (a2.QuestionId == a.QuestionId)
         {
+                    <h5 class="fw-bold col">@a2.Content</h5>
+           
+                    @if (@ViewBag.A.correctAnswers[counter].ToString() == "True")
+                    {
+                        <div class="col">
+                            <img src="~/lib/icons/check.png" height="20" alt="true"/> True
+                        </div>
+                    }
+                    else
+                    {
+                            <div class="col">
+                                 <img src="~/lib/icons/false.png" height="20" alt="false"/> False
+                            </div>
+                       
+                    }
 
-            <div class="col">@a2.Content </div>
-            <div class="col">@ViewBag.A.correctAnswers[counter]</div>
         }
 
     }
@@ -28,4 +41,7 @@
     counter++;
 }
 </div>
-<div>Total Points : @ViewBag.A.TotalScore</div>
+<h5 class="fw-bold">Total Points : @ViewBag.A.TotalScore</h5>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a class="btn btn-primary me-md-2" asp-controller="Home" asp-action="Welcome">Back to Courses</a>
+</div>

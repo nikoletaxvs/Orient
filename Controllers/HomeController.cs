@@ -6,6 +6,7 @@ using Orient.Interfaces;
 using Orient.Models;
 using System.Diagnostics;
 using System.Reflection.Metadata;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Orient.Controllers
 {
@@ -30,6 +31,23 @@ namespace Orient.Controllers
         {
             ViewBag.Questions = _db.Questions.ToList();
             IEnumerable<Question> model = _db.Questions.Include(n => n.Answers).ToList();
+            TempData["TestType"] = "multiple choice";
+            if (TempData["CurrentTest"] == "machine learning" || TempData["CurrentTest"] == "DS")
+            {
+                TempData["TestType"] = "true or false";
+            }
+            TempData.Keep("CurrentTest");
+            return View(model);
+        }
+        public IActionResult finalTest()
+        {
+            ViewBag.Questions = _db.Questions.ToList();
+            IEnumerable<Question> model = _db.Questions.Include(n => n.Answers).ToList();
+            TempData["TestType"] = "multiple choice";
+            if (TempData["CurrentTest"] == "machine learning" || TempData["CurrentTest"] == "data science")
+            {
+                TempData["TestType"] = "true or false";
+            }
             TempData.Keep("CurrentTest");
             return View(model);
         }
@@ -42,10 +60,10 @@ namespace Orient.Controllers
         }
 
         [HttpPost]
-        [Route("submit")] 
+        [Route("submit")]
         public IActionResult Submit(IFormCollection iformCollection)
         {
-           //Keeps track of whether an answer is correct or not foreach question
+            //Keeps track of whether an answer is correct or not foreach question
             List<bool> correctAns = new List<bool>();
 
             //Keeps track of the 
@@ -64,40 +82,90 @@ namespace Orient.Controllers
             string[] questionAnswers = iformCollection["questionId"];
 
             // Checking and computing score
-            foreach(var qId in questionAnswers)
+            foreach (var qId in questionAnswers)
             {
                 questionsGiven.Add(_db.Questions.Where(q => q.QuestionId == int.Parse(qId)).FirstOrDefault());
             }
-            foreach(var q in questionAnswers)
+            foreach (var q in questionAnswers)
             {
-               //Getting the correct answer for each question from the database
+                //Getting the correct answer for each question from the database
                 Answer answerIdCorrect = _db.Answers.Where(r => r.QuestionId == int.Parse(q)).Where(a => a.Correct == true).FirstOrDefault();
                 int givenAnswerId = int.Parse(iformCollection["question_" + q]);
                 currentAnswers.Add(_db.Answers.Where(s => s.AnswerId == givenAnswerId).FirstOrDefault());
-                if (answerIdCorrect.AnswerId ==givenAnswerId)
+                if (answerIdCorrect.AnswerId == givenAnswerId)
                 {
                     correct = true;
                     score++;
                 }
                 else
                 {
-                    correct= false;
+                    correct = false;
                 }
-               correctAns.Add(correct);
+                correctAns.Add(correct);
             }
-            
-             //Update total engineering stats
+
+            //Update total engineering stats
+            int completionBarrier = 5;
             int accountId = (int)HttpContext.Session.GetInt32("id");
             AccountStatistics entry = _accountStatistics.GetByAccountId(accountId);
-            int softwareEngineeringAttempts = entry.softwareEngineeringAttempts + 1;
-            if(score > 1)
-            {
-                int softwareEngineeringCompletions = entry.softwareEngineeringCompletions + 1;
-                entry.softwareEngineeringCompletions = softwareEngineeringCompletions;
+            if (TempData["CurrentTest"].ToString() == "MS") {
+                int msAttempts = entry.msAttempts + 1;
+                if (score > completionBarrier)
+                {
+                    int msCompletions = entry.msCompletions + 1;
+                    entry.msCompletions = msCompletions;
+                }
+                int msMean = (entry.msMeanScore * (msAttempts-1) +  score)/msAttempts;
+                entry.msAttempts = msAttempts;
+                entry.msMeanScore = msMean;
             }
-            int softwareEngineeringMean = entry.softwareEnginneringMeanScore + softwareEngineeringAttempts * score;
-            entry.softwareEngineeringAttempts = softwareEngineeringAttempts;
-            entry.softwareEnginneringMeanScore = softwareEngineeringMean;
+            else if(TempData["CurrentTest"].ToString() == "Software Engineering")
+            {
+                int softwareEngineeringAttempts = entry.softwareEngineeringAttempts + 1;
+                if (score > completionBarrier)
+                {
+                    int softwareEngineeringCompletions = entry.softwareEngineeringCompletions + 1;
+                    entry.softwareEngineeringCompletions = softwareEngineeringCompletions;
+                }
+                int softwareEngineeringMean = (entry.softwareEnginneringMeanScore * (softwareEngineeringAttempts - 1) + score) / softwareEngineeringAttempts;
+                entry.softwareEngineeringAttempts = softwareEngineeringAttempts;
+                entry.softwareEnginneringMeanScore = softwareEngineeringMean;
+            }
+            else if (TempData["CurrentTest"].ToString() == "DS")
+            {
+                int dsAttempts = entry.dataScienceingAttempts + 1;
+                if (score > completionBarrier)
+                {
+                    int dsCompletions = entry.dataScienceCompletions + 1;
+                    entry.dataScienceCompletions = dsCompletions;
+                }
+                int dsMean = (entry.dataSciencegMeanScore * (dsAttempts - 1) + score) / dsAttempts;
+                entry.dataScienceingAttempts = dsAttempts;
+                entry.dataSciencegMeanScore = dsMean;
+            }else if (TempData["CurrentTest"].ToString() == "UX")
+            {
+                int uxAttempts = entry.UXAttempts + 1;
+                if (score > completionBarrier)
+                {
+                    int uxCompletions = entry.UXCompletions + 1;
+                    entry.UXCompletions = uxCompletions;
+                }
+                int uxMean = (entry.UXMeanScore * (uxAttempts - 1) + score) / uxAttempts;
+                entry.UXAttempts = uxAttempts;
+                entry.UXMeanScore = uxMean;
+            }else if (TempData["CurrentTest"].ToString() == "GM")
+            {
+                int gmAttempts = entry.gameAttempts + 1;
+                if (score > completionBarrier)
+                {
+                    int gameCompletions = entry.gameCompletions + 1;
+                    entry.gameCompletions = gameCompletions;
+                }
+                int gmMean = (entry.gameMeanScore * (gmAttempts - 1) + score) / gmAttempts;
+                entry.gameAttempts = gmAttempts;
+                entry.gameMeanScore = gmMean;
+            }
+
             _accountStatistics.Update(entry);
            
            
@@ -184,23 +252,23 @@ namespace Orient.Controllers
 
             //calculating total points statistic
             var totalAttempts = 0;
-            totalAttempts += account.softwareEnginneringMeanScore;
-            totalAttempts += account.dataSciencegMeanScore;
-            totalAttempts += account.UXMeanScore;
-            totalAttempts += account.gameMeanScore;
-            totalAttempts += account.msMeanScore;
+            totalAttempts += account.softwareEngineeringAttempts;
+            totalAttempts += account.dataScienceingAttempts;
+            totalAttempts += account.UXAttempts;
+            totalAttempts += account.gameAttempts;
+            totalAttempts += account.msAttempts;
 
             //calculate completed tests
             var completedTests = 0;
-            List<int> meanScores = new List<int>();
-            meanScores.Add(account.softwareEnginneringMeanScore);
-            meanScores.Add(account.dataSciencegMeanScore);
-            meanScores.Add(account.UXMeanScore);
-            meanScores.Add(account.gameMeanScore);
-            meanScores.Add(account.msMeanScore);
-            foreach (var score in meanScores)
+            List<int>  completions= new List<int>();
+            completions.Add(account.softwareEngineeringCompletions);
+            completions.Add(account.dataScienceCompletions);
+            completions.Add(account.UXCompletions);
+            completions.Add(account.gameCompletions);
+            completions.Add(account.msCompletions);
+            foreach (var score in completions)
             {
-                if (score > 5)
+                if (score >0 )
                 {
                     completedTests++;
                 }
@@ -214,7 +282,15 @@ namespace Orient.Controllers
             averageScore += account.UXMeanScore;
             averageScore += account.gameMeanScore;
             averageScore += account.msMeanScore;
-            averageScore = averageScore / completedTests;
+            if (completedTests > 0)
+            {
+                averageScore = averageScore / completedTests;
+            }
+            else
+            {
+                averageScore = 0;
+            }
+           
 
            
             //populating ViewBag with data
@@ -232,7 +308,12 @@ namespace Orient.Controllers
             ViewBag.uxMean = account.UXMeanScore;
             ViewBag.gmMean = account.gameMeanScore;
             ViewBag.dsMean = account.dataSciencegMeanScore;
-           
+
+            ViewBag.msCompletions = account.msCompletions;
+            ViewBag.seCompletions = account.softwareEngineeringCompletions;
+            ViewBag.dsCompletions = account.dataScienceCompletions;
+            ViewBag.uxCompletions = account.UXCompletions;
+
             ViewBag.completedTests = completedTests;
 
             return View("Welcome");
@@ -249,20 +330,22 @@ namespace Orient.Controllers
             return View("LoginPage");
         }
 
+        // Course views 
         public IActionResult SoftwareEngineering()
         {
             TempData["CurrentTest"] = "Software Engineering";
+
             return View();
         }
         public IActionResult DataScience()
         {
-            TempData["CurrentTest"] = "data science";
+            TempData["CurrentTest"] = "DS";
             return View();
         }
 
         public IActionResult MachineLearning()
         {
-            TempData["CurrentTest"] = "machine learning";
+            TempData["CurrentTest"] = "MS";
             return View();
         }
 
@@ -273,7 +356,102 @@ namespace Orient.Controllers
         }
         public IActionResult GameDev()
         {
-            TempData["CurrentTest"] = "game";
+            TempData["CurrentTest"] = "GM";
+            return View();
+        }
+        public IActionResult SuggestionSystem()
+        {
+            ViewBag.Sectors = _db.DaySectors.ToList();
+            IEnumerable<DaySector> model = _db.DaySectors.Include(n => n.Parts).ToList();
+            ViewBag.username = HttpContext.Session.GetString("username");
+          //  ViewBag.username = "Nikoleta Vlachou";
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Suggest(IFormCollection iformCollection)
+        {
+            string career = string.Empty;
+            int se = 0;
+            int ms = 0;
+            int ds = 0;
+            int ux = 0;
+            int gm = 1;
+            // List of the id numbers of the questions
+            string[] sectors = iformCollection["sectionId"];
+
+            List<Part> chosenparts = new List<Part>();
+            // Checking and computing score
+           
+            foreach (var q in sectors)
+            {
+                int givenAnswerId = int.Parse(iformCollection["section_" + q]);
+                //Find Part in db
+                chosenparts.Add(_db.Parts.Where(p => p.DaySectorId == int.Parse(q)).Where(p => p.PartId == givenAnswerId).FirstOrDefault());
+               
+            }
+            foreach(var part in chosenparts)
+            {
+                //Score accordingly
+                if (part.PartCareer == "SE")
+                {
+                    se++;
+                }
+                else if(part.PartCareer == "MS")
+                {
+                    ms++;
+                }
+                else if (part.PartCareer == "DS")
+                {
+                    ds++;
+                }
+                else if (part.PartCareer == "UX")
+                {
+                    ux++;
+                }
+                else if (part.PartCareer == "GM")
+                {
+                    gm++;
+                }
+               
+                int[] numbers = new int[5] { se 
+                    ,ms,ds,ux,gm };
+                int maxNumber = numbers[0]; // Assume the first number is the maximum
+
+                // Loop through the remaining numbers and compare them with the current maximum
+                for (int i = 1; i < numbers.Length; i++)
+                {
+                    maxNumber = Math.Max(maxNumber, numbers[i]);
+                }
+                if (maxNumber == se)
+                {
+                    career = "Software Engineer";
+                }
+                else if (maxNumber == ms)
+                {
+                    career = "Machine Learning Engineer";
+                }
+                else if (maxNumber == ux)
+                {
+                    career = "UX Designer";
+                }
+                else if (maxNumber == ds)
+                {
+                    career = "Data Scientist";
+                }
+                else
+                {
+                    career = "Game Developer";
+                }
+            }
+            TempData["career"] = career;
+            return View("Career");
+        }
+        public IActionResult Career()
+        {
+            return View();
+        }
+        public IActionResult ChatBoard()
+        {
             return View();
         }
     }

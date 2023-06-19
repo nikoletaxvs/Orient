@@ -1,9 +1,10 @@
 ﻿@using System.Linq;
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Test";
     List<Question> questions = new List<Question>();
 }
 @model IEnumerable<Question>
+
 @{
     foreach(var q in Model)
     {
@@ -12,9 +13,6 @@
         {
             questions.Add(q);
         }
-        
-
-
     }
     Random random = new Random();
 
@@ -31,22 +29,60 @@
     questions.RemoveAt(n);
 }
 <div class="container" style="margin-top:5%;">
-    <form asp-controller="home" asp-action="Submit">
+    <h5 style="margin-top:5%;" class="fw-bold p-2"><i class="fi fi-sr-interrogation "></i> Assesment test </h5>
+    @if (TempData["TestType"] == "true or false")
+    {
+        <form asp-controller="home" asp-action="Submit">
 
+            <ol type="a">
+              
+               
+                    @foreach (var question in questions)
+                    {
+                        <li>
+                        <h5 class="fw-bold">@question.Content</h5>
+                        <input type="hidden" name="questionId" value="@question.QuestionId" />
+                            <ol type="a">
+                               
+                                @foreach (var ans in question.Answers)
+                                {
+                                    <li>
+
+                                    <h5 class="text-secondary"><input type="radio" name="question_@question.QuestionId" value="@ans.AnswerId" checked="checked" /> @ans.Content</h5>
+
+
+
+
+                                    </li>
+                                }
+
+
+                            </ol>
+                        </li>
+                    }
+             </ol>
+            <input type="submit" value="Submit" />
+        </form>
+    }
+    else
+    {
+        
+     <form asp-controller="home" asp-action="Submit">
+    
     <ol type="1">
-            <li>
+            
           @foreach(var question in questions){
-         
-                @question.Content
+                <li>
+                        <h5 class="fw-bold">@question.Content</h5>
                     <input type="hidden" name="questionId" value="@question.QuestionId"/>
                    <ol type="a">
                    
                     @foreach (var ans in question.Answers)
                     {
                             <li>
-                               
-                                    <input type="radio" name="question_@question.QuestionId" value="@ans.AnswerId" />
-                                    @ans.Content
+
+
+                                    <h5 class="text-secondary"><input type="radio" name="question_@question.QuestionId" value="@ans.AnswerId" checked="checked" /> @ans.Content</h5>
                                
                                    
                               
@@ -55,14 +91,14 @@
                     }
                   
 
-                </ol>
-            
+                    </ol>
+            </li>
            }
            
 
     </ol>
-    <input type="submit" value="Submit" />
-</form> 
-
+      <input type="submit" value="Submit" />
+    </form> 
+}
 </div>
 

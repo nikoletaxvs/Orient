@@ -139,6 +139,53 @@ namespace Orient.Migrations
                     b.ToTable("Answer");
                 });
 
+            modelBuilder.Entity("Orient.Models.DaySector", b =>
+                {
+                    b.Property<int>("DaySectorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DaySectorId"), 1L, 1);
+
+                    b.Property<string>("Sector")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DaySectorId");
+
+                    b.ToTable("DaySectors");
+                });
+
+            modelBuilder.Entity("Orient.Models.Part", b =>
+                {
+                    b.Property<int>("PartId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PartId"), 1L, 1);
+
+                    b.Property<int>("DaySectorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PartCareer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartIcon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PartId");
+
+                    b.HasIndex("DaySectorId");
+
+                    b.ToTable("Parts");
+                });
+
             modelBuilder.Entity("Orient.Models.Question", b =>
                 {
                     b.Property<int>("QuestionId")
@@ -210,6 +257,22 @@ namespace Orient.Migrations
                         .IsRequired();
 
                     b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("Orient.Models.Part", b =>
+                {
+                    b.HasOne("Orient.Models.DaySector", "DaySector")
+                        .WithMany("Parts")
+                        .HasForeignKey("DaySectorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DaySector");
+                });
+
+            modelBuilder.Entity("Orient.Models.DaySector", b =>
+                {
+                    b.Navigation("Parts");
                 });
 
             modelBuilder.Entity("Orient.Models.Question", b =>

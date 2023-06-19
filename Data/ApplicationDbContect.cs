@@ -13,5 +13,8 @@ namespace Orient.Data
 
        public DbSet<Account> Accounts { get; set; }
        public DbSet<AccountStatistics> AccountStatistics { get; set; }
+
+       public DbSet<DaySector> DaySectors { get; set; }
+        public DbSet<Part> Parts { get; set; } 
     }
 }

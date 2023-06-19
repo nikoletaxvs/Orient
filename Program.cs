@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Orient.Data;
 using Orient.Interfaces;
 using Orient.Repositories;
+using Orient.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,9 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IAccountStatistics, AccountStatisticsService>();
+builder.Services.AddSignalR();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,12 +36,12 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 app.UseAuthorization();
 app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=LoginPage}/{id?}");
+app.MapHub<ChatHub>("/chathub");
 
 app.Run();

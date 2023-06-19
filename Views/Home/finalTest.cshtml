@@ -1,0 +1,116 @@
+﻿@using System.Linq;
+@{
+    ViewData["Title"] = "Home Page";
+    List<Question> questions0 = new List<Question>();
+    List<Question> questions = new List<Question>();
+}
+@model IEnumerable<Question>
+
+@{
+    //randomize all questions
+    Random random = new Random();
+    foreach (var i in Model)
+    {
+        questions0.Add(i);
+    }
+
+    int n = questions0.Count;
+    while (n > 1)
+    {
+        n--;
+        int k = random.Next(n + 1);
+        Question value = questions0[k];
+        questions0[k] = questions0[n];
+        questions0[n] = value;
+
+    }
+
+    //initialize counters so each unit gets 2 questions
+    var se = 2;
+    var ms = 2;
+    var ux = 2;
+    var ds = 2;
+    var gm = 2;
+
+    // loop through randomized questions
+    foreach (var q in questions0)
+    {
+
+        if (q.Unit == "MS")
+        {
+            if(ms >0)
+            {
+                questions.Add(q);
+            } 
+            ms--;
+        }else if(q.Unit == "UX")
+        {
+            if(ux >0)
+            {
+                questions.Add(q);
+            } 
+            ux--;
+        }
+        else if (q.Unit == "Software Engineering")
+        {
+            if(se >0)
+            {
+                questions.Add(q);
+            } 
+            se--;
+        }else if(q.Unit == "DS")
+        {
+            if(ds > 0)
+            {
+                questions.Add(q);
+            }
+            ds--;
+
+        }else if(q.Unit == "GM")
+        {
+            if(gm > 0)
+            {
+                questions.Add(q);
+            }
+            gm--;
+        }
+        if(ms <=0 && se <0 && ds <0 && ux <0 && gm <= 0)
+        {
+            break;
+        }
+
+    }
+   
+    
+}
+<div class="container" style="margin-top:5%;">
+    <h5 style="margin-top:5%;" class="fw-bold p-2"><i class="fi fi-sr-interrogation "></i> Final Assesment  </h5>
+    <ol type="a">
+
+
+        @foreach (var question in questions)
+        {
+            <li>
+                <h5 class="fw-bold">@question.Content</h5>
+                <input type="hidden" name="questionId" value="@question.QuestionId" />
+                <ol type="a">
+
+                    @foreach (var ans in question.Answers)
+                    {
+                        <li>
+
+                            <h5 class="text-secondary"><input type="radio" name="question_@question.QuestionId" value="@ans.AnswerId" checked="checked" /> @ans.Content</h5>
+
+
+
+
+                        </li>
+                    }
+
+
+                </ol>
+            </li>
+        }
+    </ol>
+    
+</div>
