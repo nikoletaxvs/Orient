@@ -219,8 +219,8 @@ namespace Orient.Controllers
                     HttpContext.Session.SetInt32("loginCount", loginc);
                     HttpContext.Session.SetString("fullname", fullname);
                     HttpContext.Session.SetString("education", education);
-                    
-                    
+                    HttpContext.Session.SetString("Journey", "locked");
+
                 }
                 else
                 {
@@ -236,6 +236,7 @@ namespace Orient.Controllers
                 ViewBag.msg = "Invalid";
                 return View("LoginPage");
             }
+           
             return View();
         }
         [Route("welcome")]
@@ -315,7 +316,7 @@ namespace Orient.Controllers
             ViewBag.uxCompletions = account.UXCompletions;
 
             ViewBag.completedTests = completedTests;
-
+            ViewBag.JourneyLocked = HttpContext.Session.GetString("Journey");
             return View("Welcome");
         }
         [Route("logout")]
@@ -453,6 +454,56 @@ namespace Orient.Controllers
         public IActionResult ChatBoard()
         {
             return View();
+        }
+        [HttpPost]
+        [Route("submit")]
+        public IActionResult FinalSubmit(IFormCollection iformCollection)
+        {
+            //Keeps track of whether an answer is correct or not foreach question
+            List<bool> correctAns = new List<bool>();
+
+            //Keeps track of the 
+            bool correct;
+
+            //Keeps track of the score
+            int score = 0;
+
+            //This list keeps the answers who got choosen randomly
+            List<Question> questionsGiven = new List<Question>();
+
+            //Keeps track of the given answers 
+            List<Answer> currentAnswers = new List<Answer>();
+
+            // List of the id numbers of the questions
+            string[] questionAnswers = iformCollection["questionId"];
+
+            // Checking and computing score
+            foreach (var qId in questionAnswers)
+            {
+                questionsGiven.Add(_db.Questions.Where(q => q.QuestionId == int.Parse(qId)).FirstOrDefault());
+            }
+            foreach (var q in questionAnswers)
+            {
+                //Getting the correct answer for each question from the database
+                Answer answerIdCorrect = _db.Answers.Where(r => r.QuestionId == int.Parse(q)).Where(a => a.Correct == true).FirstOrDefault();
+                int givenAnswerId = int.Parse(iformCollection["question_" + q]);
+                currentAnswers.Add(_db.Answers.Where(s => s.AnswerId == givenAnswerId).FirstOrDefault());
+                if (answerIdCorrect.AnswerId == givenAnswerId)
+                {
+                    correct = true;
+                    score++;
+                }
+                else
+                {
+                    correct = false;
+                }
+                correctAns.Add(correct);
+            }
+
+            HttpContext.Session.SetString("Journey", "unlocked");
+            //The results are kept in this viewbag
+            ViewBag.A = new Reply() { TotalScore = score, QuestionList = questionsGiven.ToList(), AnswersList = currentAnswers, correctAnswers = correctAns };
+            return View("Report");
         }
     }
 

@@ -418,11 +418,22 @@
         <div class="card-body">
             <h5 class="card-title">Card title</h5>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <a asp-controller="home" asp-action="finalTest" class="btn btn-warning">Get it done</a>
         </div>
     </div>
 </div>
-<div class="container py-3">
-    <h1 class="p-4 text-center fw-bold" style="color:#3A3B3C">Career Journey</h1>
-    <a class="btn btn-warning" asp-action="SuggestionSystem" asp-controller="home">go</a>
-</div>
+@if (ViewBag.JourneyLocked == "locked")
+{
+    <div class="container py-3">
+        <h1 class="p-4 text-center fw-bold" style="color:#3A3B3C">Career Journey</h1>
+        <a class="btn btn-secondary" href="#">locked</a>
+    </div>
+}
+else
+{
+    <div class="container py-3">
+        <h1 class="p-4 text-center fw-bold" style="color:#3A3B3C">Career Journey</h1>
+        <a class="btn btn-warning" asp-action="SuggestionSystem" asp-controller="home">go</a>
+    </div>
+}
+
