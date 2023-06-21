@@ -1,6 +1,6 @@
 ﻿
 @{
-    Layout = null;
+    Layout = "_Layout";
 }
 
 <!DOCTYPE html>
@@ -11,6 +11,121 @@
     <title>Career</title>
 </head>
 <body>
-    @TempData["career"]
+   
+    @if (@TempData["career"] == "Software Engineer")
+    {
+        <img style="height:50vh;width:100vw;object-fit:cover;filter:brightness(0.3);z-index:0;" src="~/lib/icons/soft.jpg" />
+        <h1 class="text-center">Software Engineering Career<span style="color:limegreen"> @TempData["match"] %</span> match</h1>
+        <h2>Career Options for Software Engineers</h2>
+        <ul>
+            <li>Software Developer: This role involves designing, coding, and testing software applications. Software developers can specialize in various areas, such as web development, mobile app development, or game development.</li>
+            <li>Full-stack Developer: Full-stack developers have expertise in both front-end and back-end development. They can work on all layers of a software application, including the user interface, business logic, and database.</li>
+            <li>DevOps Engineer: DevOps engineers focus on the integration of development and operations processes. They work on automating infrastructure, continuous integration/continuous deployment (CI/CD) pipelines, and ensuring efficient collaboration between development and operations teams.</li>
+            <li>Data Scientist: Data scientists analyze and interpret complex data to gain insights and drive decision-making. They use machine learning, statistical modeling, and data visualization techniques to solve problems and extract meaningful information from data.</li>
+            <li>Cybersecurity Specialist: With the increasing importance of protecting digital systems, cybersecurity specialists play a vital role in securing software applications and networks. They implement security measures, conduct risk assessments, and respond to security incidents.</li>
+        </ul>
+
+        <h2>Master's Degrees Available in Athens</h2>
+        <ul>
+            <li>Master's in Computer Science: This program provides advanced knowledge in computer science concepts, algorithms, programming languages, and software engineering practices.</li>
+            <li>Master's in Software Engineering: This degree focuses specifically on software engineering principles, methodologies, and practices, preparing students for leadership roles in software development.</li>
+            <li>Master's in Data Science: This program emphasizes advanced data analysis, machine learning, and statistical modeling techniques. It equips students with skills to extract insights from large datasets.</li>
+            <li>Master's in Cybersecurity: This degree focuses on developing expertise in cybersecurity concepts, network security, cryptography, and ethical hacking. It prepares students for careers in securing digital systems.</li>
+            <li>Master's in Artificial Intelligence: This program explores advanced topics in AI, including machine learning, natural language processing, robotics, and computer vision. It equips students with skills to develop intelligent systems and algorithms.</li>
+        </ul>
+
+
+    }
+    else if (@TempData["career"] == "Machine Learning Engineer"){
+        <img style="height:50vh;width:100vw;object-fit:cover;filter:brightness(0.3);z-index:0;" src="~/lib/icons/ai.jpg" />
+        <h1 class="text-center">Machine Learning Career<span style="color:limegreen"> @TempData["match"] %</span> match</h1>
+        <h2>Career Options in Machine Learning:</h2>
+        <ul>
+            <li>Machine Learning Engineer: Machine learning engineers develop and deploy machine learning models and systems. They work on data preprocessing, feature engineering, model training, and deployment to create intelligent solutions.</li>
+            <li>AI Researcher: AI researchers focus on advancing the field of artificial intelligence by developing new algorithms, models, and techniques. They explore cutting-edge research areas such as deep learning, reinforcement learning, and natural language processing.</li>
+            <li>Computer Vision Engineer: Computer vision engineers specialize in developing systems that can interpret and understand visual data. They work on tasks like object recognition, image classification, and video analysis using machine learning and deep learning techniques.</li>
+            <li>Natural Language Processing (NLP) Engineer: NLP engineers work on building systems that can understand and generate human language. They develop models for tasks such as sentiment analysis, text classification, machine translation, and chatbot development.</li>
+            <li>Machine Learning Consultant: Machine learning consultants provide expertise and guidance to businesses on implementing machine learning solutions. They analyze business problems, design appropriate machine learning models, and help organizations leverage data-driven insights.</li>
+        </ul>
+
+        <h2>Master's Degrees Available in Athens:</h2>
+        <ul>
+            <li>Master's in Artificial Intelligence: This degree explores advanced topics in AI, including machine learning, deep learning, natural language processing, robotics, and computer vision. It prepares students for roles in AI research and development.</li>
+            <li>Master's in Robotics: This degree focuses on the intersection of robotics and machine learning. It covers topics like robot perception, motion planning, reinforcement learning for robotics, and autonomous systems.</li>
+            <li>Master's in Computer Science (Specialization in Machine Learning): This program provides a comprehensive understanding of machine learning algorithms, statistical modeling, and data analysis. It prepares students for careers in machine learning engineering, AI research, and related fields.</li>
+            <li>Master's in Business Analytics: This program combines business knowledge with data analysis and machine learning techniques. It equips students with skills to leverage data for business insights, predictive modeling, and decision-making.</li>
+        </ul>
+
+    }
+    else if (TempData["career"] == "Data Scientist")
+    {
+       <img style="height:50vh;width:100vw;object-fit:cover;filter:brightness(0.3);z-index:0;" src="~/lib/icons/datas.jpg" />
+        <h1 class="text-center">Data Science Career<span style="color:limegreen"> @TempData["match"] %</span> match</h1>
+        <h2>Career Options in Data Science:</h2>
+        <ul>
+            <li>Data Analyst: Data analysts gather, clean, and analyze data to extract insights and support decision-making. They use statistical techniques, data visualization, and data mining to uncover patterns and trends.</li>
+            <li>Business Intelligence Analyst: Business intelligence analysts focus on analyzing complex datasets to identify business opportunities, optimize processes, and provide strategic insights to organizations.</li>
+            <li>Data Engineer: Data engineers design, build, and maintain the infrastructure required for data storage, processing, and retrieval. They develop data pipelines, implement ETL (Extract, Transform, Load) processes, and ensure data quality and integrity.</li>
+            <li>Data Consultant: Data consultants provide expertise and guidance to organizations on data-driven strategies. They help businesses identify key metrics, implement data analytics solutions, and interpret results to drive business growth.</li>
+            <li>Data Visualization Specialist: Data visualization specialists transform complex data into visually appealing and informative dashboards, charts, and graphs. They use tools like Tableau, Power BI, or Python libraries to create compelling visual representations of data.</li>
+        </ul>
+
+        <h2>Master's Degrees Available in Athens:</h2>
+        <ul>
+            <li>Master's in Data Analytics: This program focuses on advanced data analysis techniques, data visualization, and statistical modeling. It equips students with skills to derive insights from data and make data-driven decisions.</li>
+            <li>Master's in Business Analytics: This degree combines business knowledge with data analysis techniques. It prepares students to leverage data for strategic decision-making, predictive modeling, and optimization of business processes.</li>
+            <li>Master's in Information Systems: This program explores the intersection of technology and business. It covers topics such as data management, business intelligence, and analytics, preparing students for roles in managing and analyzing organizational data.</li>
+            <li>Master's in Applied Statistics: This degree focuses on statistical modeling, experimental design, and data analysis techniques. It equips students with advanced statistical skills for analyzing complex datasets.</li>
+        </ul>
+
+    }
+    else if (TempData["career"] == "UX Designer")
+    {
+       <img style="height:50vh;width:100vw;object-fit:cover;filter:brightness(0.3);z-index:0;" src="~/lib/icons/ux.jpg" />
+        <h1 class="text-center">UX Design Career<span style="color:limegreen"> @TempData["match"] %</span> match</h1>
+        <h2>Career Options in UX Design:</h2>
+        <ul>
+            <li>UX Designer: UX designers are responsible for creating user-centered design solutions. They conduct user research, create wireframes and prototypes, and collaborate with development teams to ensure intuitive and engaging user experiences.</li>
+            <li>Interaction Designer: Interaction designers focus on designing the interactions between users and digital products. They define the behavior and functionality of user interfaces, considering factors such as usability, accessibility, and user goals.</li>
+            <li>Information Architect: Information architects organize and structure information within digital products. They create navigational systems, sitemaps, and taxonomies to enhance the findability and usability of content.</li>
+            <li>UX Researcher: UX researchers conduct user research to gather insights and inform design decisions. They employ methods such as interviews, usability testing, and surveys to understand user needs, behaviors, and preferences.</li>
+            <li>UI Designer: UI designers specialize in creating visually appealing and user-friendly interfaces. They work on selecting colors, typography, icons, and layout to create aesthetically pleasing and intuitive user interfaces.</li>
+        </ul>
+
+        <h2>Master's Degrees Available in Athens:</h2>
+        <ul>
+            <li>Master's in User Experience Design: This program focuses on the principles and methodologies of UX design. It covers topics such as user research, interaction design, information architecture, usability testing, and prototyping.</li>
+            <li>Master's in Human-Computer Interaction: This degree explores the intersection of psychology, design, and technology. It delves into user-centered design approaches, usability evaluation, cognitive psychology, and user interface design.</li>
+            <li>Master's in Design and Multimedia: This program provides a broader focus on design and multimedia, including UX design. It covers areas such as visual design, motion graphics, web design, and interactive media.</li>
+            <li>Master's in Digital Communication Design: This degree combines design principles with digital communication strategies. It covers topics like UX/UI design, branding, storytelling, and digital marketing.</li>
+        </ul>
+
+    }
+    else if (TempData["career"] == "Game Developer")
+    {
+       <img style="height:50vh;width:100vw;object-fit:cover;filter:brightness(0.3);z-index:0;" src="~/lib/icons/game.jpg" />
+        <h1 class="text-center">Game Development Career<span style="color:limegreen"> @TempData["match"] %</span> match</h1>
+        <h2>Game Development Career Options:</h2>
+        <ul>
+            <li>Game Programmer: Develop and implement game mechanics, artificial intelligence, and game physics using programming languages like C++, Java, or Python.</li>
+            <li>Game Designer: Create game concepts, design gameplay mechanics, levels, and user interfaces.</li>
+            <li>Game Artist: Create 2D or 3D graphics, animations, and visual effects for games using software like Photoshop, Maya, or Unity.</li>
+            <li>Game Writer: Craft engaging narratives, dialogues, and storylines for video games.</li>
+            <li>Game Producer: Oversee the development process, manage budgets and schedules, and coordinate teams to ensure timely delivery of games.</li>
+            <li>Game Tester: Evaluate game functionality, identify bugs, and provide feedback to improve gameplay experience.</li>
+            <li>Game Sound Designer: Create sound effects, background music, and voice-overs to enhance the audio experience in games.</li>
+            <li>Game Marketing Specialist: Develop marketing strategies, create promotional materials, and engage with the gaming community to promote and sell games.</li>
+        </ul>
+
+        <h2>Master's Degrees Available in Athens:</h2>
+        <ul>
+            <li>Master of Science in Computer Science: This program offers advanced coursework in computer science, including topics such as algorithms, software engineering, artificial intelligence, and graphics, which can be relevant to game development.</li>
+            <li>Master of Arts in Digital Media: Focuses on digital media production, including game design, animation, virtual reality, and interactive storytelling.</li>
+            <li>Master of Arts in Game Design: Provides specialized training in game design principles, game mechanics, storytelling, and player experience.</li>
+            <li>Master of Fine Arts in Game Art: Focuses on developing artistic skills for game development, including 2D and 3D graphics, animation, and visual effects.</li>
+            <li>Master of Business Administration (MBA) with a specialization in Technology Management: Offers a comprehensive understanding of business management principles with a focus on the technology sector, which can be beneficial for pursuing managerial roles in game development studios.</li>
+        </ul>
+
+    }
 </body>
 </html>

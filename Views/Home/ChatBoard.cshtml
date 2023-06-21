@@ -1,19 +1,26 @@
-﻿@page
-<div class="box p-5 m-2"></div>
-<div class="container mt-3 pt-3" style="margin-top:10%;">
-    <div class="row p-1">
-        <div class="col-1">User</div>
-        <div class="col-5"><input type="text" id="userInput" /></div>
-    </div>
-    <div class="row p-1">
-        <div class="col-1">Message</div>
-        <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
-    </div>
-    <div class="row p-1">
-        <div class="col-6 text-end">
-            <input type="button" id="sendButton" value="Send Message" />
-        </div>
-    </div>
+﻿@model chatAnswer
+@{
+    List<string> messages = new List<string>();
+    if(ViewBag.messages != null)
+    {
+        foreach(var a in ViewBag.messages)
+        {
+            messages.Add(a);
+        }
+    }
+}
+<div class="container mt-5 pt-5">
+
+    <form method="post" asp-action="Create" asp-controller="Home">
+        <div class="row">
+            <label asp-for="Name"></label>
+            <input type="text" asp-for="Name" id="userInput" />
+            <input type="text" asp-for="Message" id="messageInput" />
+            <input type="text" asp-for="Date" id="dateInput"/>
+            <button type="submit" class="btn-primary" id="sendButton">Submit </button>
+            
+     
+    </form>
     <div class="row p-1">
         <div class="col-6">
             <hr />
@@ -24,6 +31,14 @@
             <ul id="messagesList"></ul>
         </div>
     </div>
+    
 </div>
-<script src="~/js/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/chat.js"></script>
+
+    <div class="container">
+       
+        <div class="row p-1">
+            <div class="col-6">
+                <ul id="messagesList"></ul>
+            </div>
+        </div>
+    </div>

@@ -14,17 +14,19 @@ namespace Orient.Controllers
     {
         private IAccountService _accountService;
         private IAccountStatistics _accountStatistics;
+        private IChatAnswer _chatAnswer;
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor _ctx;
         private readonly ApplicationDbContect _db;
         List<string> answearList = new List<string>();
-        public HomeController(ILogger<HomeController> logger,IHttpContextAccessor ctx, ApplicationDbContect db, IAccountService accountService, IAccountStatistics accountStatistics)
+        public HomeController(ILogger<HomeController> logger,IHttpContextAccessor ctx, ApplicationDbContect db, IAccountService accountService, IAccountStatistics accountStatistics, IChatAnswer chatAnswer)
         {
             _logger = logger;
             _ctx = ctx;
             _db = db;
             _accountService = accountService;
             _accountStatistics = accountStatistics;
+            _chatAnswer = chatAnswer;
         }
 
         public IActionResult Index()
@@ -105,7 +107,7 @@ namespace Orient.Controllers
             }
 
             //Update total engineering stats
-            int completionBarrier = 5;
+            int completionBarrier = 4;
             int accountId = (int)HttpContext.Session.GetInt32("id");
             AccountStatistics entry = _accountStatistics.GetByAccountId(accountId);
             if (TempData["CurrentTest"].ToString() == "MS") {
@@ -219,7 +221,7 @@ namespace Orient.Controllers
                     HttpContext.Session.SetInt32("loginCount", loginc);
                     HttpContext.Session.SetString("fullname", fullname);
                     HttpContext.Session.SetString("education", education);
-                    HttpContext.Session.SetString("Journey", "locked");
+                    HttpContext.Session.SetString("Journey", "unlocked");
 
                 }
                 else
@@ -314,6 +316,7 @@ namespace Orient.Controllers
             ViewBag.seCompletions = account.softwareEngineeringCompletions;
             ViewBag.dsCompletions = account.dataScienceCompletions;
             ViewBag.uxCompletions = account.UXCompletions;
+            ViewBag.gmCompletions = account.gameCompletions;
 
             ViewBag.completedTests = completedTests;
             ViewBag.JourneyLocked = HttpContext.Session.GetString("Journey");
@@ -364,7 +367,7 @@ namespace Orient.Controllers
         {
             ViewBag.Sectors = _db.DaySectors.ToList();
             IEnumerable<DaySector> model = _db.DaySectors.Include(n => n.Parts).ToList();
-            ViewBag.username = HttpContext.Session.GetString("username");
+            ViewBag.username = HttpContext.Session.GetString("fullname");
           //  ViewBag.username = "Nikoleta Vlachou";
             return View(model);
         }
@@ -372,11 +375,16 @@ namespace Orient.Controllers
         public IActionResult Suggest(IFormCollection iformCollection)
         {
             string career = string.Empty;
-            int se = 0;
-            int ms = 0;
-            int ds = 0;
-            int ux = 0;
-            int gm = 1;
+            double testFactor = 0.3;
+            double journeyFactor = 0.7;
+            int accountId = (int)HttpContext.Session.GetInt32("id");
+            AccountStatistics account = _accountStatistics.GetByAccountId(accountId);
+            
+            double se = account.softwareEnginneringMeanScore * testFactor;
+            double ms = account.msMeanScore* testFactor;
+            double ds = account.msCompletions * testFactor;
+            double ux = account.UXMeanScore * testFactor;
+            double gm = account.gameMeanScore * testFactor;
             // List of the id numbers of the questions
             string[] sectors = iformCollection["sectionId"];
 
@@ -395,34 +403,35 @@ namespace Orient.Controllers
                 //Score accordingly
                 if (part.PartCareer == "SE")
                 {
-                    se++;
+                    se=se + 2*0.7;
                 }
                 else if(part.PartCareer == "MS")
                 {
-                    ms++;
+                    ms = ms + 2 * 0.7;
                 }
                 else if (part.PartCareer == "DS")
                 {
-                    ds++;
+                    ds = ds + 2 * 0.7;
                 }
                 else if (part.PartCareer == "UX")
                 {
-                    ux++;
+                    ux=ux + 2 * 0.7;
                 }
                 else if (part.PartCareer == "GM")
                 {
-                    gm++;
+                    gm=gm + 2 * 0.7;
                 }
                
-                int[] numbers = new int[5] { se 
+                double[] numbers = new double[5] { se 
                     ,ms,ds,ux,gm };
-                int maxNumber = numbers[0]; // Assume the first number is the maximum
+                double maxNumber = numbers[0]; // Assume the first number is the maximum
 
                 // Loop through the remaining numbers and compare them with the current maximum
                 for (int i = 1; i < numbers.Length; i++)
                 {
                     maxNumber = Math.Max(maxNumber, numbers[i]);
                 }
+                TempData["match"] = maxNumber*10;
                 if (maxNumber == se)
                 {
                     career = "Software Engineer";
@@ -456,7 +465,6 @@ namespace Orient.Controllers
             return View();
         }
         [HttpPost]
-        [Route("submit")]
         public IActionResult FinalSubmit(IFormCollection iformCollection)
         {
             //Keeps track of whether an answer is correct or not foreach question
@@ -504,6 +512,22 @@ namespace Orient.Controllers
             //The results are kept in this viewbag
             ViewBag.A = new Reply() { TotalScore = score, QuestionList = questionsGiven.ToList(), AnswersList = currentAnswers, correctAnswers = correctAns };
             return View("Report");
+        }
+        [HttpPost]
+        public IActionResult Create(chatAnswer model)
+        {
+            chatAnswer chatAnswer = new chatAnswer();
+            chatAnswer = model;
+            if (ModelState.IsValid)
+            {
+                _chatAnswer.AddAnswer(chatAnswer);
+
+            }
+            return View("ChatBoard");
+        }
+        public IActionResult Help()
+        {
+            return View();
         }
     }
 

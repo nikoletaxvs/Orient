@@ -31,7 +31,6 @@
     var ux = 2;
     var ds = 2;
     var gm = 2;
-
     // loop through randomized questions
     foreach (var q in questions0)
     {
@@ -85,6 +84,8 @@
 }
 <div class="container" style="margin-top:5%;">
     <h5 style="margin-top:5%;" class="fw-bold p-2"><i class="fi fi-sr-interrogation "></i> Final Assesment  </h5>
+    <form asp-controller="home" asp-action="FinalSubmit">
+
     <ol type="a">
 
 
@@ -112,6 +113,6 @@
             </li>
         }
     </ol>
-    
+    <input type="submit" class="btn btn-primary" value="Submit"/>
+    </form>
 </div>
-<a asp-controller="home" asp-action="finalSubmit" class="btn btn-primary">Submit</a>

@@ -21,6 +21,7 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IAccountStatistics, AccountStatisticsService>();
+builder.Services.AddScoped<IChatAnswer, chatAnswerRepository>();
 builder.Services.AddSignalR();
 
 

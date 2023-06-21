@@ -139,6 +139,29 @@ namespace Orient.Migrations
                     b.ToTable("Answer");
                 });
 
+            modelBuilder.Entity("Orient.Models.chatAnswer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChatAnswers");
+                });
+
             modelBuilder.Entity("Orient.Models.DaySector", b =>
                 {
                     b.Property<int>("DaySectorId")

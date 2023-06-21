@@ -30,7 +30,7 @@
                         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle   text-uppercase text-secondary fw-bold" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle text-uppercase text-secondary fw-bold" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Careers
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu  text-uppercase text-secondary fw-bold" aria-labelledby="navbarDarkDropdownMenuLink">
@@ -44,6 +44,12 @@
                             </ul>
                         </div>
                        
+                        <li class="nav-item">
+                            <a class="nav-link text-uppercase text-secondary fw-bold" asp-area="" asp-controller="Home" asp-action="ChatBoard">Community Chat</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-uppercase text-secondary fw-bold" asp-area="" asp-controller="Home" asp-action="Help">Help</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-uppercase text-secondary fw-bold" asp-controller="home" asp-action="logout">
                                 Logout
@@ -72,6 +78,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/chat.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

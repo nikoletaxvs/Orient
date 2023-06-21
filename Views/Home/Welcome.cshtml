@@ -416,24 +416,39 @@
     <div class="card mb-3">
         <img style="height:30vh;object-fit:cover;filter:brightness(0.6);z-index:0;" src="https://img.freepik.com/free-photo/woman-attending-online-class-close-up_23-2148854927.jpg?w=1480&t=st=1687083297~exp=1687083897~hmac=c5aa01f5f77016dbe59a41392d1fbcd264b4e3c9dd660ce15c070206aa3c5d78" class="card-img-top" alt="" />
         <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <a asp-controller="home" asp-action="finalTest" class="btn btn-warning">Get it done</a>
+            <p class="card-text">Each time you log in you will have to complete this test succesfully in order to take your career journey below.</p>
+            <div class="d-grid gap-2">
+            @if (ViewBag.gmCompletions > 0)
+            {
+                <a asp-controller="home" asp-action="finalTest" class="btn btn-warning p-3">Get it done</a>
+
+            }else{
+                <div class="btn btn-secondary p-3">Locked</div>
+
+            }
+            </div>
         </div>
     </div>
 </div>
+<h1 class="p-4 text-center fw-bold" style="color:#3A3B3C">Career Journey</h1>
+<div class="container mt-4 py-3">
+<div class="card mb-3">
+        <img style="height:30vh;object-fit:cover;filter:brightness(0.6);z-index:0;" src="https://img.freepik.com/free-photo/closeup-shot-person-holding-compass-with-burred-background_181624-4493.jpg?w=1380&t=st=1687108419~exp=1687109019~hmac=de1c42f96d6c695f391e4dbed2cda453e055d480020a43740aeb8b42f334fb5a" class="card-img-top" alt="" />
+    <div class="card-body">
+        <p class="card-text">This is a story based test that will take you to Tecnoville ,a city where you are working as a computer science specialist.You will have to choose what you think is best at each point of the story.Have fun!</p>
+            <div class="d-grid gap-2">
 @if (ViewBag.JourneyLocked == "locked")
 {
-    <div class="container py-3">
-        <h1 class="p-4 text-center fw-bold" style="color:#3A3B3C">Career Journey</h1>
-        <a class="btn btn-secondary" href="#">locked</a>
-    </div>
+   
+        
+        <a class="btn btn-secondary p-3" href="#">Locked</a>
+    
 }
 else
 {
-    <div class="container py-3">
-        <h1 class="p-4 text-center fw-bold" style="color:#3A3B3C">Career Journey</h1>
-        <a class="btn btn-warning" asp-action="SuggestionSystem" asp-controller="home">go</a>
-    </div>
+        <a class="btn btn-warning p-3" asp-action="SuggestionSystem" asp-controller="home">Explore Careers</a>
 }
-
+</div>
+    </div>
+</div>
+</div>

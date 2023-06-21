@@ -16,5 +16,6 @@ namespace Orient.Data
 
        public DbSet<DaySector> DaySectors { get; set; }
         public DbSet<Part> Parts { get; set; } 
+        public DbSet<chatAnswer> ChatAnswers { get; set; }
     }
 }
