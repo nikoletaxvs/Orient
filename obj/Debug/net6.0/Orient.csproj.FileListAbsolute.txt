@@ -541,3 +541,13 @@ C:\Users\vvlac\source\repos\Orient\bin\Debug\net6.0\zh-CN\Humanizer.resources.dl
 C:\Users\vvlac\source\repos\Orient\bin\Debug\net6.0\zh-Hans\Humanizer.resources.dll
 C:\Users\vvlac\source\repos\Orient\bin\Debug\net6.0\zh-Hant\Humanizer.resources.dll
 C:\Users\vvlac\source\repos\Orient\bin\Debug\net6.0\libman.json
+C:\Users\vvlac\source\repos\Orient\bin\Debug\net6.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\vvlac\source\repos\Orient\bin\Debug\net6.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+C:\Users\vvlac\source\repos\Orient\bin\Debug\net6.0\Microsoft.AspNetCore.Http.Connections.Common.dll
+C:\Users\vvlac\source\repos\Orient\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Client.dll
+C:\Users\vvlac\source\repos\Orient\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
+C:\Users\vvlac\source\repos\Orient\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\vvlac\source\repos\Orient\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+C:\Users\vvlac\source\repos\Orient\bin\Debug\net6.0\Microsoft.Extensions.Features.dll
+C:\Users\vvlac\source\repos\Orient\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\vvlac\source\repos\Orient\bin\Debug\net6.0\System.IO.Pipelines.dll

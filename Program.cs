@@ -23,7 +23,18 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IAccountStatistics, AccountStatisticsService>();
 builder.Services.AddScoped<IChatAnswer, chatAnswerRepository>();
 builder.Services.AddSignalR();
-
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:7826")
+                .AllowAnyHeader()
+                .WithMethods("GET", "POST")
+                .SetIsOriginAllowed((host)=>true)
+                .AllowCredentials();
+        });
+});
 
 var app = builder.Build();
 
@@ -42,7 +53,8 @@ app.UseAuthorization();
 app.UseSession();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=LoginPage}/{id?}");
-app.MapHub<ChatHub>("/chathub");
+    pattern: "{controller=Home}/{action=ChatBoard}/{id?}");
+app.UseCors();
 
+app.MapHub<ChatHub>("/chathub");
 app.Run();

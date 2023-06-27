@@ -1,26 +1,18 @@
-﻿@model chatAnswer
-@{
-    List<string> messages = new List<string>();
-    if(ViewBag.messages != null)
-    {
-        foreach(var a in ViewBag.messages)
-        {
-            messages.Add(a);
-        }
-    }
-}
-<div class="container mt-5 pt-5">
-
-    <form method="post" asp-action="Create" asp-controller="Home">
-        <div class="row">
-            <label asp-for="Name"></label>
-            <input type="text" asp-for="Name" id="userInput" />
-            <input type="text" asp-for="Message" id="messageInput" />
-            <input type="text" asp-for="Date" id="dateInput"/>
-            <button type="submit" class="btn-primary" id="sendButton">Submit </button>
-            
-     
-    </form>
+﻿<div class="mt-5 pt-5">Chat</div>
+<div class="container">
+    <div class="row p-1">
+        <div class="col-1">User</div>
+        <div class="col-5"><input type="text" id="userInput" value="@ViewBag.chatName" /></div>
+    </div>
+    <div class="row p-1">
+        <div class="col-1">Message</div>
+        <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
+    </div>
+    <div class="row p-1">
+        <div class="col-6 text-end">
+            <input type="button" id="sendButton" value="Send Message" />
+        </div>
+    </div>
     <div class="row p-1">
         <div class="col-6">
             <hr />
@@ -28,17 +20,36 @@
     </div>
     <div class="row p-1">
         <div class="col-6">
-            <ul id="messagesList"></ul>
-        </div>
-    </div>
-    
-</div>
 
-    <div class="container">
-       
-        <div class="row p-1">
-            <div class="col-6">
-                <ul id="messagesList"></ul>
-            </div>
+            <ul id="messagesList">
+                @foreach (var h in ViewBag.chat_history)
+                {
+                    <li>@h.Message</li>
+                }
+            </ul>
         </div>
     </div>
+</div>
+<div class="container">
+    <div class="header">WebChat</div>
+    <span class="body message-section">
+       
+            @foreach (var h in ViewBag.chat_history)
+            {   <span>@h.Date</span>
+                 <p class="message msg-box">
+                <span class="fw-bold">@h.Name</span>
+                <span>@h.Message</span>
+                </p>
+            }
+           
+        
+       
+    </div>
+    <div class="footer input-section row">
+        <form>
+            <input class="input col" type="text" name="" />
+            <button class="btn2 col">SEND</button>
+        </form>
+    </div>
+
+</div>

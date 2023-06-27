@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Orient.Data;
 using Orient.Interfaces;
 using Orient.Models;
+using Orient.Hubs;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using static System.Formats.Asn1.AsnWriter;
@@ -18,8 +20,9 @@ namespace Orient.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor _ctx;
         private readonly ApplicationDbContect _db;
+        private IHubContext<ChatHub> marketHub;
         List<string> answearList = new List<string>();
-        public HomeController(ILogger<HomeController> logger,IHttpContextAccessor ctx, ApplicationDbContect db, IAccountService accountService, IAccountStatistics accountStatistics, IChatAnswer chatAnswer)
+        public HomeController(ILogger<HomeController> logger,IHttpContextAccessor ctx, ApplicationDbContect db, IAccountService accountService, IAccountStatistics accountStatistics, IChatAnswer chatAnswer , IHubContext<ChatHub> hub)
         {
             _logger = logger;
             _ctx = ctx;
@@ -27,6 +30,8 @@ namespace Orient.Controllers
             _accountService = accountService;
             _accountStatistics = accountStatistics;
             _chatAnswer = chatAnswer;
+           
+            marketHub= hub;
         }
 
         public IActionResult Index()
@@ -189,6 +194,7 @@ namespace Orient.Controllers
         {
             return View();
         }
+        [ValidateAntiForgeryToken]
         [HttpPost]
         [Route("login")]
         public IActionResult Login(string username, string password)
@@ -371,6 +377,7 @@ namespace Orient.Controllers
           //  ViewBag.username = "Nikoleta Vlachou";
             return View(model);
         }
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public IActionResult Suggest(IFormCollection iformCollection)
         {
@@ -462,8 +469,11 @@ namespace Orient.Controllers
         }
         public IActionResult ChatBoard()
         {
+            ViewBag.chatName = "lora";
+            ViewBag.chat_history= _chatAnswer.GetChatAnswers();
             return View();
         }
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public IActionResult FinalSubmit(IFormCollection iformCollection)
         {
@@ -529,6 +539,7 @@ namespace Orient.Controllers
         {
             return View();
         }
+      
     }
 
 }
